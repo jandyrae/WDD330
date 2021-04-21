@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week01</title>
     <script src="week01.js"></script>
+    <style>
+        body {
+            background-color: linen;
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            text-align: center;
+            margin: auto;
+        }
+
+        input {
+            width: 25%;
+        }
+
+        textarea {
+            width: 800px;
+            height: 250px;
+            background-color: mintcream;
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <h1>Week 1 (notes and work)</h1>
+        <h2>Story Editor</h2>
+        <a href="index.html">Back to Index</a>
         <hr>
     </header>
-    
+    <section>Story Name: <input id=name_input></input><br><br></section>
+    <section>
+        <button onclick="loadStory()">Find and Edit</button>
+        <button onclick="saveStory()">Save It</button>
+        <button onclick="displayStory()">Display It</button>
+    </section>
+    <br>
+    <div>
+        <textarea id="story_editor" placeholder="Write a totally awesome story here."></textarea>
+    </div>
+    <div id="story_display">When you find your file, click display and it will show it here.</div>
 </body>
+
 </html>
