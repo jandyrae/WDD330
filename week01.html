@@ -26,6 +26,9 @@
             height: 250px;
             background-color: mintcream;
         }
+        img {
+           margin: auto;
+        }
     </style>
 </head>
 
@@ -36,7 +39,7 @@
         <a href="index.html">Back to Index</a>
         <hr>
     </header>
-    <section>Story Name: <input id=name_input></input><br><br></section>
+    <section>Story Name: <input id=name_input placeholder="Remember your title to recall later"></input><br><br></section>
     <section>
         <button onclick="loadStory()">Find and Edit</button>
         <button onclick="saveStory()">Save It</button>
@@ -47,6 +50,7 @@
         <textarea id="story_editor" placeholder="Write a totally awesome story here."></textarea>
     </div>
     <div id="story_display">When you find your file, click display and it will show it here.</div>
+<hr><h5>Notes for this week</h5>
+<img src="/mobileUXnotes.png" alt="notes from videos" width="425px" height="550">
 </body>
-
 </html>
