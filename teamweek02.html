@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teamstyle02.css">
+    <title>Team3 Week2</title>
+</head>
+
+<body>
+    <header>
+        <h2>Week 2 Team activity</h2>
+    </header>
+    <hr>
+    <script src="team3week2.js"></script>
+    <h4>Core Requirement</h4>
+    <!-- sum of numbers -->
+
+    <input type="text" name="number" id="number" placeholder="Enter a number: " onblur="checkValue();">
+    <p id="warning">Must be a number!</p>
+    <div id="result1"></div>
+    <button id="btn" onclick="sum(parseInt(document.getElementById('number').value))" ;>Total</button>
+    <br><br>
+    <!-- adding inputs -->
+
+    <input type="text" id="add1" placeholder="First number">
+    <button id="add"
+        onclick="add(parseFloat(document.getElementById('add1').value), parseFloat(document.getElementById('add2').value))">
+        + </button>
+    <button id="subtraction"
+        onclick="subtraction(parseFloat(document.getElementById('add1').value), parseFloat(document.getElementById('add2').value));">
+        - </button>
+    <button id="multiply"
+        onclick="multiply(parseFloat(document.getElementById('add1').value), parseFloat(document.getElementById('add2').value));">
+        * </button>
+    <input type="text" id="add2" placeholder="Second number">
+    <div id="result2"></div>
+
+</body>
+
+</html>
