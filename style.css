@@ -2,4 +2,11 @@
 body {
     background-color: lightgrey;
     font-size: x-large;
+   
+}
+div > container{
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    flex-wrap: wrap;
 }

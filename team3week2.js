@@ -13,6 +13,7 @@ function checkValue() {
 //  number 1, 3
 function sum(number) {
     // debugger;
+    // callback
     if (checkValue) {
         let total = number;
         for (let i = 0; i < number; i++) {
@@ -25,15 +26,15 @@ function sum(number) {
 }
 
 // stretch
-
+// declaration function
 function add(x, y) {
     document.getElementById('result2').innerHTML = x + y;
 }
-
+// arrow function
 const subtraction = (x, y) => {
     document.getElementById('result2').innerHTML = x - y
 };
-
+// function expression
 const multiply = function (x, y) {
     document.getElementById('result2').innerHTML = x * y
 };
