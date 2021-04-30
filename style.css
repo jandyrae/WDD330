@@ -4,9 +4,21 @@ body {
     font-size: x-large;
    
 }
-div > container{
+#container{
     display: flex;
     flex-direction: row;
+    margin: auto;
     width: 75%;
     flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgb(40, 99, 117);
+    border-radius: 10px;
+}
+#container > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px; 
+    border-radius: 10px; 
+
 }
