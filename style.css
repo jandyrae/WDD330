@@ -1,7 +1,8 @@
 /* css for index.html */
 body {
     background-color: lightgrey;
-    font-size: x-large;
+    font-size: larger;
+
    
 }
 #container{
