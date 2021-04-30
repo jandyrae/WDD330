@@ -177,7 +177,7 @@ const horn = () => {
 
   horn(); // to call the function
 
-debugger; 
+// debugger; 
 
   function multiplier(factor) {
     return number => number * factor;
