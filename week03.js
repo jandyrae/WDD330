@@ -83,9 +83,9 @@ function Human (name) {
 //   with event listeners
 let button = document.querySelector('button');
 
-button.addEventListener('click', function() {
-  console.log(this); // button
-});
+// button.addEventListener('click', function() {
+//   console.log(this); // button
+// });
 
 // novice to ninja chapter 5 Objects
 const spiderman = {}; // created an object literal assigned to the variable spiderman
@@ -97,7 +97,7 @@ const realName = 'Tony Stark';
 // short ES6 way
 const ironMan = { name, realName };
 // to access the properties use dot notation ironMan.name or bracket notation superman['name] 
-const hulk = {name = 'Hulk', catchPhrase: 'Hulk Smash!' };
+const hulk = {name : 'Hulk', catchPhrase: 'Hulk Smash!' }
 
 superman = {
     name: 'Superman',
@@ -111,7 +111,8 @@ superman = {
         return 'Up, up and away!';
     }
 };
-
+// In this example, we create a variable called key . We then iterate over the properties of the 
+// superman object and use key to log the property name and superman[key] to look up the value of each property.
 for(const key in superman) {
     console.log(key + ": " + superman[key]);
 }
@@ -125,3 +126,5 @@ for(const key in superman) {
 //  "fly: function (){
 //     console.log(\"Up, up and away!\");
 // }"
+
+// Object.keys() and Object.values() are used to see the key or value respectively of an object
