@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Justice League</title>
+
+</head>
+
+<body>
+    <header>
+        <h1 id='title'>Justice League</h1>
+    </header>
+    <ul id='roster'>
+        <li class='hero'>Superman</li>
+        <li class='vigilante hero' id='bats'>Batman</li>
+        <li class='hero'>Wonder Woman</li>
+    </ul>
+    <script>
+        const body = document.body; // allows access via variable
+        typeof body; // determine dataType
+        console.log(typeof body);
+        body.nodeType; //  should return 1 (element)
+        body.nodeName; // "BODY"
+        /* 
+        Document.body returns the body element of a web page.
+         Document.images returns a node list of all the images contained in the document.
+         Document.links returns a node list of all the <a> elements and <area> elements that have an href attribute.
+         Document.anchors returns a node list of all the <a> elements that have a name attribute.
+         Document.forms returns a node list of all the forms in the document. 
+         */
+        document.images[
+        0]; // returns 1st image in the node list of all the images of the document (can also use .length)
+        const imageArray = Array.from(document.images); // can turn node list into array
+        const h1 = document.getElementById('title'); // catch the reference with the variable
+        console.log(h1);
+        const listItems = document.getElementsByTagName('li');
+        console.log(listItems); // can use [] to access each element like array
+        const heroes = document.getElementsByClassName('hero'); // elements by class name
+        console.log(heroes.length); // 3
+        /*
+        Query Selectors
+        The document.querySelector() method allows you to use CSS notation to find thefirstelement in the document 
+        that matches a CSS selector provided as an argument. If no elements match, it will return null .
+        The document.querySelectorAll() method also uses CSS notation but returns a node list ofallthe elements in the document 
+        that match the CSS query selector. If no elements match, it will return an empty node list.
+        */
+        // instead of document.getElementById()
+        document.querySelector('#bats');
+        // instead of document.getElementsByClassName
+        document.querySelectorAll('.hero');
+        // The following code, for example, will return only the last list item in the document
+        const wonderWoman = document.querySelector('li:last-child');
+        // The querySelector() method can be called on any element, rather than just document, get a reference to the <ul> element, using the following
+        const ul = document.querySelector('ul#roster');
+        const batman = ul.querySelector('li#bats'); // find a <li> element with an id of 'bats'
+        /*The childNodes property is a list of all the nodes that are children of the node concerned. The following example will return all the 
+    child nodes of the element with an id attribute of roster
+        */
+        const heroes = document.getElementById('roster');
+        heroes.childNodes;
+        /*NodeList [#text "
+        ", <li class="hero">, #text "
+        ", <li id="bats">, #text "
+        ", <li class="hero">, #text "
+        ", <li class="hero">, #text "*/
+        heroes.children; // this will only contain list items -children property only returns anyelementnodes that are children of that node, so will ignore any text nodes
+    </script>
+</body>
+
+</html>

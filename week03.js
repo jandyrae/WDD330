@@ -127,4 +127,18 @@ for(const key in superman) {
 //     console.log(\"Up, up and away!\");
 // }"
 
-// Object.keys() and Object.values() are used to see the key or value respectively of an object
+// Object.keys() and Object.values() are methods used to see the key or value respectively of an object
+
+/* DOM Notes
+Console Shortcuts
+Here are a couple of useful shortcuts for the console:
+Pressing TAB will autocomplete any methods and should show you a list of possible methods
+Pressing the UP arrow key will select the previous command entered.
+NodeTypes
+Code	Type
+1	element
+2	attribute
+3	text
+8	comment
+9	body
+*/

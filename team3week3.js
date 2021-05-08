@@ -140,20 +140,30 @@
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
-
+      const birthdate = inventors.sort((a, b) => a.year - b.year);
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live?
-
+      const totalYears = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year);
+      }, 0);
+      console.log(totalYears);
       // 5. Sort the inventors by years lived
-
+      const inventorsLived = inventors.sort((a, b) => (a.passed - a.year) - (b.passed - b.year));
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
       // goto the link above and open the console. Paste the following two lines in.  That will create a list of links in memory that you can reference through the console. Use that list to finish the problem.
       // const category = document.querySelector('.mw-category');
       // const links = Array.from(category.querySelectorAll('a'));
 
+
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+      const alpha = people.sort((lastOne, nextOne) => {
+        const [aLast, aFirst] = lastOne.split(', ');
+        const [bLast, bFirst] = nextOne.split(', ');
+        return aLast > bLast ? 1 : -1;
+      });
+      console.log(alpha);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -173,3 +183,71 @@
         'car',
         'truck'
       ];
+      // array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+      // data.reduce(function())
+      result = {};
+      for (var i = 0; i < data.length; ++i) {
+        if (!result[data[i]])
+          result[data[i]] = 0;
+        ++result[data[i]];
+      }
+      console.log(result);
+
+
+      // part 2
+      // ## Array Cardio Day 2
+
+      const peoples = [{
+          name: 'Wes',
+          year: 1988
+        },
+        {
+          name: 'Kait',
+          year: 1986
+        },
+        {
+          name: 'Irv',
+          year: 1970
+        },
+        {
+          name: 'Lux',
+          year: 2015
+        }
+      ];
+
+      const comments = [{
+          text: 'Love this!',
+          id: 523423
+        },
+        {
+          text: 'Super good',
+          id: 823423
+        },
+        {
+          text: 'You are the best',
+          id: 2039842
+        },
+        {
+          text: 'Ramen is my fav food ever',
+          id: 123523
+        },
+        {
+          text: 'Nice Nice Nice!',
+          id: 542328
+        }
+      ];
+
+      // Some and Every Checks
+      // Array.prototype.some() // is at least one person 19 or older?
+      console.log(peoples.some((person) => (2021 - person.year) >= 19)); // true
+      // Array.prototype.every() // is everyone 19 or older?
+      console.log(peoples.every((person) => 2021 - person.year >= 19)); // false
+      // Array.prototype.find()
+      // Find is like filter, but instead returns just the one you are looking for
+      // find the comment with the ID of 823423
+      console.log(comments.find((element) => element.id === 823423)); // {text: "Super good", id: 823423}
+      // Array.prototype.findIndex()
+      // Find the comment with this ID
+      console.log(comments.findIndex((comment) => comment.id == 823423));
+      // delete the comment with the ID of 823423
+      console.log(comments.findIndex((comment) => comment.id == 823423));
