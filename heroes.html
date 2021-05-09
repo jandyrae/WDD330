@@ -8,6 +8,8 @@
 </head>
 
 <body>
+    <a href="index.html">Back to Index</a>
+    <hr>
     <header>
         <h1 id='title'>Justice League</h1>
     </header>
@@ -50,21 +52,98 @@
         // instead of document.getElementsByClassName
         document.querySelectorAll('.hero');
         // The following code, for example, will return only the last list item in the document
-        const wonderWoman = document.querySelector('li:last-child');
+        // const wonderWoman = document.querySelector('li:last-child');
         // The querySelector() method can be called on any element, rather than just document, get a reference to the <ul> element, using the following
         const ul = document.querySelector('ul#roster');
         const batman = ul.querySelector('li#bats'); // find a <li> element with an id of 'bats'
         /*The childNodes property is a list of all the nodes that are children of the node concerned. The following example will return all the 
     child nodes of the element with an id attribute of roster
         */
-        const heroes = document.getElementById('roster');
-        heroes.childNodes;
+        const hero = document.getElementById('roster');
+        console.log(hero.childNodes);
         /*NodeList [#text "
         ", <li class="hero">, #text "
         ", <li id="bats">, #text "
         ", <li class="hero">, #text "
         ", <li class="hero">, #text "*/
-        heroes.children; // this will only contain list items -children property only returns anyelementnodes that are children of that node, so will ignore any text nodes
+        console.log(hero.children); // this will only contain list items -children property only returns anyelementnodes that are children of that node, so will ignore any text nodes
+        console.log(hero.firstChild); // #text  - same for hero.lastChild; 
+        const wonderWoman = document.querySelector('ul#roster li:last-child');
+        console.log(wonderWoman.parentNode);  // << <ul id='roster'>…</ul>
+        // wonderWoman.nextSibling or wonderWoman.previousSibling to move through the document
+
+        /* Node Values
+        to find the value of the node on line 69 wonderWoman has a dom that contains the line
+        <li class='hero'>Wonder Woman</li> it has the text needed but it is within the node
+        set a variable to it then use .nodeValue to get the text within the element
+        */
+        const textNode = wonderWoman.firstchild;
+        // textNode.nodeValue; // or use the .textContent to do the same thing wonderWoman.textContent
+
+        // getters and setters 
+        wonderWoman.getAttribute('class'); // .getAttribute()
+        wonderWoman.setAttribute('class', 'villain'); // .setAttribute(whichAttribute, changeTo)
+        wonderWoman.setAttribute('id','amazon');
+        wonderWoman.getAttribute('id'); // amazon
+        // .className to see and even change the class name BUT it will change them all AVOID by using classList (adds rather than overwriting)
+        wonderWoman.classList.add('warrior'); // remove doing the same wonderWoman.classList.remove('warrior');
+        wonderWoman.className; // hero warrior
+        // with classList you can .toggle() which will add or remove if exists, and .contains() returning a bool value.
+        /* 
+        Creating Elements
+        1 Create the element node
+        2 Create the text node
+        3 Append the text node to the element node
+        */
+        const flash = document.createElement('li'); // the line item is emptym but it is created
+        const flashText = document.createTextNode('Flash'); // creates the text for the element but they aren't linked
+        flash.appendChild(flashText); // uses appendChild() to append the text 'child' to the li element
+        /*    same as above but quicker
+        const flash = document.createElement('li');
+        flash.textContent = 'Flash';
+        ****************************
+        use a function to create element
+*/
+        function createElement (tag,text) {
+        const el = document.createElement(tag);
+        el.textContent = text;
+        return el
+        }
+        const aquaman = createElement('li','Aquaman');
+        hero.appendChild(flash); // adds to the end of the elements in heroes
+        hero.insertBefore(aquaman,wonderWoman); // insert changing order (not just at the end as appendChild does)
+        // hero.removeChild(aquaman); would remove <li>Aquaman</li> (and return it like this heroes.appendChild(aquaman);)
+        /*
+        replaceChild() method can be used to replace one node with another. It’s called on the parent node and 
+        has two parameters: the new node and the node that is to be replaced. 
+        */
+        // const h1 = document.getElementById('title');
+        const oldText = h1.firstChild;
+        const newText = document.createTextNode('Justice League of America');
+        h1.replaceChild(newText,oldText);
+        hero.innerHTML; // returns all the child elements as a string
+        h1.innerHTML = 'Suicide Squad'; // can enter raw html as a string
+        hero.innerHTML = '<li>Harley Quinn</li><li>Deadshot</li><li>Killer Croc</li><li>Enchantress</li><li>Captain Boomerang</li><li>Katana</li><li>Slipknot</li>';
+        // to use style (css) within accessing the dom
+        harleyQ = hero.children[0];
+        harleyQ.style.border = "red 2px solid";
+        // change css naming to camel case verses dash -> background-color becomes backgroundColor
+        harleyQ.style.backgroundColor = 'lightblue';
+        //  you can check or get computed style getComputedStyle(harleyQ).getPropertyCSSValue('color').cssText;
+
+/* Summary
+The Document Object Model is a way of representing a page of HTML as a tree of nodes.
+The document.getElementById() , document.getElementsByClassName() , document.getElementsByTagNames() and document.querySelector() 
+can be used to access elements on a page.
+The parentNode() , previousSibling() , nextSibling() , childNodes() and children() methods can be used to navigate around the DOM tree.
+An element’s attributes can be accessed using the getAttribute() method, and updated using the setAttribute() method.
+The createElement() and createTextNode() methods can be used to create dynamic markup on the fly.
+Markup can be added to the page using the appendChild() and insertBefore() methods.
+Elements can be replaced using the replaceChild() method, and removed using the removeChild() method.
+The innerHTML property can be used to insert raw HTML directly into the DOM.
+The CSS properties of an element can be changed by accessing the style property.
+*/
+
     </script>
 </body>
 
