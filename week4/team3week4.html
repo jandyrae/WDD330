@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="team3week4.css">
+    
     <title>TIC TAC TOE</title>
 </head>
-<body>
+<body onclick="playGame();">
+<!-- <body ontouchend="playGame()";> -->
     <!-- Core Requirements
  Build a 3X3 board in HTML and CSS.
 You could do this with either a table element, or a collection of divs. Both have their advantages and disadvantages.
@@ -22,16 +24,38 @@ When touched the reset button should remove all of the marks from the board. -->
  <a href="../index.html">Back to Index</a>
  <hr>
 </header>
+<h1>Tic-Tac-Toe</h1>
 <div class="gameboard">
-<div class="topLeft"></div>
-<div class="topMid"></div>
-<div class="topRight"></div>
-<div class="midLeft"></div>
-<div class="midMid"></div>
-<div class="midRight"></div>
-<div class="bottomLeft"></div>
-<div class="bottomMid"></div>
-<div class="bottomRight"></div>
+<div class="tictactoe" id="topLeft">
+    <p>X</p>
 </div>
+<div class="tictactoe" id="topMid">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="topRight">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="midLeft">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="midMid">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="midRight">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="bottomLeft">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="bottomMid">
+    <p>X</p>
+</div>
+<div class="tictactoe" id="bottomRight">
+    <p>X</p>
+</div>
+</div>
+<section><button id="reset" onclick="reset();">Reset</button></section>
+
+<script src="ticTacToe.js"></script>
 </body>
 </html>
