@@ -5,15 +5,16 @@ const player1 = "X"
 const player2 = "O"
 
 function playerTurn(event) {
-  if (!event.target.innerHTML.length){
+  if (!event.target.innerHTML.length) {
     event.target.innerHTML = currentPlayer;
-  if (currentPlayer === player1) {
-    currentPlayer = player2;
-  } else {
-    currentPlayer = player1;
+    if (currentPlayer === player1) {
+      currentPlayer = player2;
+    } else {
+      currentPlayer = player1;
+    }
   }
 }
-}
+
 function reset() {
   const myNode = document.querySelectorAll(".square");
   //console.log(myNode);
