@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 4</title>
+    <link rel="stylesheet" href="week4.css">
+    
 </head>
 <body>
     <header>
@@ -12,6 +14,37 @@
      <a href="../index.html">Back to Index</a>
      <hr>
     </header>
-    Enter notes here
+    
+    In chapter 8, we’ll cover these topics:<br>
+    Form controls <br>
+    >   input - fields, including text, passwords, check boxes, radio buttons, and file uploads
+    <br>>   select - menus for drop-down lists of options
+    <br>>   textarea - elements for longer text entry
+    <br>>   button -  elements for submitting and resetting forms
+    <br>Accessing form elements<br>
+    Form properties and methods<br>
+    Form events<br>
+    Submitting a form<br>
+    Retrieving and changing values from a form<br>
+    Form validation<br>
+    <div>
+
+    <form name='search' action='/search'>
+        <input name='searchInput'>
+        <button type='submit' name="submit">Search</button>
+       <!-- other ways to submit forms below 
+        <input type='submit' value='Submit'>
+        <input type='image' src='button.png'> -->
+    <!-- <button type='reset'>Reset</button>  -->
+    <label for='donation-amount'>Enter amount to donate: 
+        <input type='text' id ='donation-amount' name='donationAmount' value='10'>
+    </label>
+
+    </form>
+</div>
+<div>
+<a href="heroes4.html">Week 4 heroes page</a>
+</div>
+<script src="week4.js"></script>
 </body>
 </html>
