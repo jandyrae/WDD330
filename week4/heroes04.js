@@ -12,7 +12,7 @@ function makeHero(event) {
 hero.realName = form.realName.value;
 form.powers;
 hero.powers = [];
-for (let i=0; i < form.powers.length; i++) {
+for (let i = 0; i < form.powers.length; i++) {
     if (form.powers[i].checked) {
         hero.powers.push(form.powers[i].value);
     }
@@ -33,7 +33,8 @@ hero.origin = form.origin.value; // access the textarea
 form.origin.value = 'Born as Kal-El on the planet Krypton...'; // to set value in the form directly or in the html directly
 
 // to validate
-form.addEventListener('submit',validate,false);
+form.addEventListener('submit', validate, false);
+
 function validate(event) {
     const firstLetter = form.heroName.value[0];
     if (firstLetter.toUpperCase() === 'X') {
@@ -47,21 +48,22 @@ const error = document.createElement('div');
 error.classList.add('error');
 error.textContent = '! Your name is not allowed to start with X.';
 label.append(error);
+
 function validateInline() {
     const heroName = this.value.toUpperCase();
-    if(heroName.startsWith('X')){
-    error.style.display = 'block';
+    if (heroName.startsWith('X')) {
+        error.style.display = 'block';
     } else {
-    error.style.display = 'none';
+        error.style.display = 'none';
     }
 }
 
 // if invalid it is best if form cannot be submitted
 function disableSubmit(event) {
-    if(event.target.value === ''){
+    if (event.target.value === '') {
         document.getElementById('submit').disabled = true;
     } else {
         document.getElementById('submit').disabled = false;
     }
 }
-form.heroName.addEventListener('keyup',disableSubmit,false);
+form.heroName.addEventListener('keyup', disableSubmit, false);

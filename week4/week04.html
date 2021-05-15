@@ -1,54 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 4</title>
     <link rel="stylesheet" href="week4.css">
-    
+
 </head>
+
 <body>
     <header>
         <nav>
-        <h2>Week 4 Stuff</h2>
-     <a href="../index.html">Back to Index</a><div>
-        <a href="heroes4.html">Week 4 heroes page</a>
-        </div>
-        <div>
-            <a href="quizninja4.html">QuizNinja</a>
-        </div></nav>
-     <hr>
+            <h2>Week 4 Stuff</h2>
+            <a href="../index.html">Back to Index</a>
+            <div>
+                <a href="heroes4.html">Week 4 heroes page</a>
+            </div>
+            <div>
+                <a href="quizninja4.html">QuizNinja</a>
+            </div>
+        </nav>
+        <hr>
     </header>
-    <p>
-    In chapter 8, we’ll cover these topics:<br>
-    Form controls <br>
-    >   input - fields, including text, passwords, check boxes, radio buttons, and file uploads
-    <br>>   select - menus for drop-down lists of options
-    <br>>   textarea - elements for longer text entry
-    <br>>   button -  elements for submitting and resetting forms
-    <br>Accessing form elements<br>
-    Form properties and methods<br>
-    Form events<br>
-    Submitting a form<br>
-    Retrieving and changing values from a form<br>
-    Form validation<br></p>
-    <div>
+    <div class="form">
+        <p>
+            In chapter 8, we’ll cover these topics:<br>
+            Form controls <br>
+            > input - fields, including text, passwords, check boxes, radio buttons, and file uploads
+            <br>> select - menus for drop-down lists of options
+            <br>> textarea - elements for longer text entry
+            <br>> button - elements for submitting and resetting forms
+            <br>Accessing form elements<br>
+            Form properties and methods<br>
+            Form events<br>
+            Submitting a form<br>
+            Retrieving and changing values from a form<br>
+            Form validation<br></p>
+        <div>
 
-    <form name='search' action='/search'>
-        <input name='searchInput'>
-        <button type='submit' name="submit">Search</button>
-       <!-- other ways to submit forms below 
+
+            <form name='search' action='/search'>
+                <input name='searchInput'>
+                <button type='submit' name="submit">Search</button>
+                <!-- other ways to submit forms below 
         <input type='submit' value='Submit'>
         <input type='image' src='button.png'> -->
-    <!-- <button type='reset'>Reset</button>  -->
-    <label for='donation-amount'>Enter amount to donate: 
-        <input type='text' id ='donation-amount' name='donationAmount' value='10'>
-    </label>
+                <!-- <button type='reset'>Reset</button>  -->
+                <label for='donation-amount'>Enter amount to donate:
+                    <input type='text' id='donation-amount' name='donationAmount' value='10'>
+                </label>
 
-    </form>
-</div>
+            </form>
+        </div>
+        <div>
+            <h2>Forms</h2>
+            <form id="register" method="post">
+                <header>
+                    <h1>Sign Me Up!</h1>
+                    <p>I would like to receive your fine publication.</p>
+                </header>
+                <ul>
+                    <li>
+                        <label for="register-name">My name is:</label>
+                        <input type="text" id="register-name" name="name" required aria-required="true">
+                    </li>
+                    <li>
+                        <label for="email">My email address is:</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </li>
+                    <label for="favcolor">Favorite Color</label>
+                    <li>
+                        <input type="color" list="colors" id="favcolor" name="favcolor">
+                        <datalist id="colors">
+                            <option value="#0000FF" label="blue">
+                            <option value="#008000" label="green">
+                            <option value="#ff0000" label="red">
+                            <option value="#663399" label="RebeccaPurple">
+                        </datalist></li>
+                    <li>
+                        <label for="url">My website is located at:</label>
+                        <input type="url" id="url" name="url">
+                    </li>
+                    <li>
+                        <label for="password">I would like my password to be:</label>
+                        <p>(at least 6 characters, no spaces)</p>
+                        <input type="password" id="password" name="password" required
+                            title="(at least 6 characters, no spaces)" pattern="\S{6,}">
+                    </li>
+                    <li>
+                        <label for="rating">On a scale of 1 to 10, my knowledge of HTML5 is:</label>
+                        <input name="rating" type="range" min="1" max="10" step="1">
+                    </li>
+                    <li>
+                        <label for="startdate">Please start my subscription on:</label>
+                        <input type="date" min="1904-03-17" max="1904-05-17" id="startdate" name="startdate" required
+                            aria-required="true" placeholder="1904-03-17">
+                    </li>
+                    <li>
+                        <label for="quantity">I would like to receive
+                            <input type="number" min="1" name="quantity" id="quantity"> copies of
+                            <cite> The HTML5 Herald</cite></label>
+                    </li>
+                    <li>
+                        <label for="upsell">Also sign me up for <cite>The CSS3 Chronicle</cite></label>
+                        <input type="checkbox" id="upsell" name="upsell" value="CSS Chronicle">
+                    </li>
+                    <li>
+                        <input type="submit" id="register-submit" value="Send Post Haste">
+                    </li>
+                </ul>
+                <li>
+                    <label for="clr">Color: </label>
+                    <input id="clr" name="clr" type="color" placeholder="#ffffff" pattern="#(?:[0-9A-Fa-f]{6})">
+                </li>
+            </form>
+            <form id="search" method="get">
+                <label for="s">Search</label>
+                <input type="search" id="s" name="s">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+    <div class="oop">
+        <h2>OOP </h2>
+        <p>
+            In this chapter, we’ll cover the following <br>
+            An introduction to OOP - <br>
+            Constructor functions
+            , Using classes in JavaScript
+            , Prototypes
+            , Public and private methods
+            , Inheritance
+            , Creating objects from objects
+            , Adding methods to built-in objects
+            , Mixins
+            , Chaining functions
+            , This and that
+            , Borrowing methods from prototypes
 
-<script src="week4.js"></script>
+        </p>
+        <div>
+            <h3>OOP chapter summary</h3>
+            <p><br>
+                -- Object-oriented programming (OOP) is a way of programming that uses objects that encapsulate their
+                own properties and methods.<br>
+                -- The main concepts of OOP are encapsulation, polymorphism and inheritance.<br>
+                -- Constructor functions can be used to create instances of objects.<br>
+                -- ES6 introduced class declarations that use the class keyword. These can be used in place of
+                constructor functions.<br>
+                -- Inside a constructor function or class declaration, the keyword this refers to the object returned by
+                the function.<br>
+                -- All instances of a class or constructor function inherit all the properties and methods of its
+                prototype.<br>
+                -- The prototype is live, so new properties and methods can be added to existing instances.<br>
+                --The prototype chain is used to find an available method. If an object lacks a method, JavaScript will
+                check whether its prototype
+                has the method. If not, it will check that function’s prototype until it finds the method or reaches the
+                Object constructor function.<br>
+                --Private properties and methods can be created by defining variables using const and defining a
+                function inside a constructor function. <br>
+                --These can be made public using getter and setter functions. <br>
+                -- Monkey-patching is the process of adding methods to built-in objects by augmenting their prototypes.
+                This should be done with caution
+                as it can cause unexpected behavior in the way built-in objects work. <br>
+                -- A mixin method can be used to add properties and methods from other objects without creating an
+                inheritance chain. <br>
+                -- Methods can be chained together and called in sequence if they return a reference to this. <br>
+                -- Polymorphism allows objects to override shared methods with a more specific implementation. <br>
+                -- The value of this is not retained inside nested functions, which can cause errors. This can be worked
+                around by using that = this ,
+                using the bind(this) method and using arrow functions.<br>
+                -- Methods can be borrowed from other objects. <br>
+                -- Composition over inheritance is a design pattern where objects are composed from 'building-block'
+                objects, rather than inheriting
+                all their properties and methods from a parent class.</p>
+        </div>
+    </div>
+    <div id='modern'>
+        <p>Libraries, Modular JS, MVC Frameworks, Package Managers, Optimization (via minification), Build processes
+            using Webpack </p>
+    </div>
+
+    <script src="week4.js"></script>
 </body>
+
 </html>

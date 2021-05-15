@@ -18,7 +18,7 @@ function playerTurn(event) {
 
 //  reset came functionality
 function reset() {
-restartGame();
+  restartGame();
 }
 
 let gameStart = ["", "", "", "", "", "", "", "", ""];
@@ -80,7 +80,7 @@ function checkWinner() {
   if (gameWon) {
     statusDisplay.innerHTML = winningMessage();
     gameRunning = false;
-  } 
+  }
   // handles if no one wins but there are no empty spaces a "draw"
   let drawGame = !gameStart.includes("");
   if (drawGame) {
