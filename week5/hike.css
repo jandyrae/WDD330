@@ -11,3 +11,21 @@ div {
     margin: auto;
     width: 80%;
 }
+.hidden {
+  display: none;
+}
+.image {
+  width: auto;
+}
+li {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+h2 {
+  text-align: center;
+  width: 100%;
+}
+#text {
+text-align: right;
+}

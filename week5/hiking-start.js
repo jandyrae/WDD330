@@ -1,4 +1,4 @@
-// importScripts
+
 //create an array of hikes
 const hikeList = [
     {
@@ -36,18 +36,61 @@ const hikeList = [
   ];
   
   const imgBasePath = "//byui-cit.github.io/cit261/examples/";
-  //on load grab the array and insert it into the page
-  window.addEventListener("load", () => {
-    showHikeList();
-  });
-  
-  function showHikeList() {
-    const hikeListElement = document.getElementById("hikes");
-    hikeListElement.innerHTML = "";
-    renderHikeList(hikeList, hikeListElement);
+
+export default class Hikes {
+  constructor(elementId) {
+    this.parentElement = document.getElementById(elementId);
+    this.backbutton = this.buildBackButton();
   }
+  getAllHikes() {
+    return hikeList;
+  }
+getHike(hikeName) {
+  return this.getAllHikes().find(hike => hike.name === hikeName);
+}
+showHikeList() {
+  this.parentElement.innerHTML = '';
+  renderHikeList(this.parentElement, this.getAllHikes());
+  this.addHikeListener();
+  this.backbutton.classList.add('hidden');
+}
+showOneHike(hikeName) {
+  const hike = this.getHike(hikeName);
+  this.parentElement.innerHTML = '';
+  this.parentElement.appendChild(renderOneFullHike(hike));
+  this.backbutton.classList.remove('hidden');
+}
+addHikeListener() {
+  const childArray = Array.from(this.parentElement.children);
+  childArray.forEach(child => {
+    child.addEventListener('touchend', e => {
+      this.showOneHike(e.currentTarget.dataset.name);
+    });
+  });
+}
+buildBackButton() {
+  const backbutton = document.createElement('button');
+  backbutton.innerHTML = '&lt;- All Hikes';
+  backbutton.addEventListener('touchend', () => {
+    this.showHikeList();
+  });
+  backbutton.classList.add('hidden');
+  this.parentElement.before(backbutton);
+  return backbutton;
+}
+}
+// class Hikes closed
+
   
-  function renderHikeList(hikes, parent) {
+  // function showHikeList() {
+  //   const hikeListElement = document.getElementById("hikes");
+  //   hikeListElement.innerHTML = "";
+  //   renderHikeList(hikeList, hikeListElement);
+  // }
+  
+  
+  // are hikes and parent reversed?
+  function renderHikeList(parent, hikes) {
     hikes.forEach(hike => {
       parent.appendChild(renderOneHike(hike));
     });
@@ -67,7 +110,41 @@ const hikeList = [
                       <p>${hike.difficulty}</p>
                   </div>
           </div>`;
+          // add a touch element 
+          item.addEventListener('touchend', event => {
+            console.dir(event);
+            console.dir(event.currentTarget);
+            item.addHikeListener();
+          })
   
+    return item;
+  }
+
+  // need to add the extra 
+  function renderOneFullHike(hike) {
+    const item = document.createElement('li');
+    item.innerHTML = `
+    <h2>${hike.name}</h2>
+          <div class="image"><img src="${imgBasePath}${hike.imgSrc}" alt="${hike.imgAlt}"></div>
+          <div>
+                  <div>
+                      <h3>Distance</h3>
+                      <p>${hike.distance}</p>
+                  </div>
+                  <div>
+                      <h3>Difficulty</h3>
+                      <p>${hike.difficulty}</p>
+                  </div>
+                  <div>
+                      <h3>Description</h3>
+                      <p>${hike.description}</p>
+                  </div>
+                  <div>
+                      <h3>Directions</h3>
+                      <p>${hike.directions}</p>
+                  </div>
+          </div>
+    `;
     return item;
   }
   
