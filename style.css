@@ -19,6 +19,7 @@ body {
     padding: 20px;
     font-size: 30px; 
     border-radius: 10px; 
+    width: 25%;
 
 }
 img {
@@ -28,4 +29,7 @@ img {
     position: fixed;
     bottom: 0;
     right: 0;
+}
+a:hover {
+    font-size: 150%;
 }
