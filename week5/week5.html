@@ -1,46 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 5</title>
-    <script>
-        function displayDate() {
-  document.getElementById("date").innerHTML = Date();
-}
-        </script>
-</head>
-<body>
 
-    <h2>Find HTML Elements Using document.forms</h2>
-    <button onclick="displayDate()">Click here for date information</button><p id="date"></p>
-    <form id="frm1" >
-      First name: <input type="text" name="fname" value="Donald"><br>
-      Last name: <input type="text" name="lname" value="Duck"><br><br>
-      <input type="submit" value="Submit">
-    </form> 
-    
-    <p>Click "Try it" to display the value of each element in the form.</p>
-    
-    <button onclick="myFunction()">Try it</button>
-    
-    <p id="demo"></p>
-    
-    <script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="week5.css">
+  <script src="week5.js"></script>
+  <title>Week 5</title>
+  <script>
+    function displayDate() {
+      document.getElementById("date").innerHTML = Date();
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h2>Week 5 Stuff</h2>
+      <a href="../index.html">Back to Index</a>
+      <div>
+          <a href="todo.html">ToDo</a>
+      </div>
+      <div>
+          <a href="/WDD330/week4/quizninja4.html">QuizNinja</a>
+      </div>
+  </nav>
+  <hr>
+  </header>
+
+<div id="notes">
+<p id="errors">
+  <h2> Notes on Week 5 (Chapter 10) </h2>
+  <b> Errors, Exceptions, and Warnings </b> <br>
+  System error ― there’s a problem with the system or external devices with which the program is interacting. <br>
+  Programmer error ― the program contains incorrect syntax or faulty logic; it could even be as simple as a typo.<br>
+  User error ― the user has entered data incorrectly, which the program is unable to handle. <br><br>
+Exception <br> exception is an error that produces a return value that can then be used by the program to deal with the error <br>
+Stack Trace can be very helpful -  you can follow the listing to trace where the problem lies <br>
+Warnings - warning can occur if there’s an error in the code that isn't enough to cause the program to crash <br>
+ -- this can be a problem if the program runs incorrectly but still runs <br>
+Because it is loosely typed some errors can slip through the code, you can enforce a strict mode -> 'use strict'; <br>
+ -- this will make it throw an exception instead of a warning (if the engine will accept the mode) <br>
+ In can be used in a function or a strict function that will run the whole program code.
+</p>
+<hr>
+<p id="linting">
+  <b> Linting Tools</b> <br>
+  options to use linting tools help when enforcing a style guide, it will help catch errors live but won't necessarily guarantee anything. <br>
+  ESLint inthis article on SitePoint - https://www.sitepoint.com/up-and-running-with-eslint-the-pluggable-javascript-linter/. <br>
+  Feature detectors are best implemented in an if statement - therefore only running if it is capable. <br>
+  if (window.holoDeck) { <br>
+    virtualReality.activate(); <br>
+} <br>
+</p>
+<hr>
+<p id="debugging">
+<b> Debugging in the browser</b> is my favorite way of checking how things work, and when they are implemented, even why they don't. <br>
+The book says the 'trusty alert is the basic form of debugging' however, I like console.log(); and debugger; <br>
+function amIOldEnough(age){ <br>
+  if (age = 12) {<br>
+      alert(age);<br>
+      return 'No, sorry.';<br>
+  } else if (age < 18) {<br>
+      return 'Only if you are accompanied by an adult.';<br>
+  }<br>
+  else {<br>
+      return 'Yep, come on in!';<br>
+  }<br>
+}<br>
+the above code has a bug... should check for under 12 not assigned variable to 12 <br>
+console.trace() method will log an interactive stack trace in the console <br>
+breakpoints that allow pausing and ability to step through the program is very helpful (can be built in to the program with the debugger; I mentioned earlier) <br>
+Remember to remove prior to shipping any code - doesn't just stop for testing! <br>
+</p>
+<hr>
+<p id="errorObj">
+<b>Error Objects</b> <br>
+ EvalError is not used in the current ECMAScript specification and only retained for backwards compatibility. It was used to identify errors when using the global eval() function.<br>
+ RangeError is thrown when a number is outside an allowable range of values.<br>
+ ReferenceError is thrown when a reference is made to an item that doesn’t exist. For example, calling a function that hasn't been defined.<br>
+ SyntaxError is thrown when there’s an error in the code’s syntax.<br>
+ TypeError is thrown when there’s an error in the type of value used; for example, a string is used when a number is expected.<br>
+ URIError is thrown when there’s a problem encoding or decoding the URI.<br>
+ InternalError is a non-standard error that is thrown when an error occurs in the JavaScript engine. A common cause of this too much recursion.<br>
+ const error = new Error(); Constructor function to create and the parameter is the error message  -> const error = new Error("oops, something isn't right"); <br>
+ <br> there are errors that are thrown automatically by the JavaScript engine when an error occurs. It’s also possible to throw your own exceptions using the throw statement <br>
+ throw new Error('Something has gone badly wrong!'); <br>
+This example shows the error to be efficient in explaining the problem - not just NaN <br><br>
+function squareRoot(number) {<br>
+  'use strict';<br>
+  if (number < 0) {<br>
+      throw new RangeError('You can't find the square root of negative numbers')<br>
+  }<br>
+  return Math.sqrt(number);<br>
+};<br>
+<b>Handling the Exceptions</b> <br>
+ -- using try, catch, and finally we can 'try' and run the code, 'catch' the error to be able to return an acceptable answer and continue the program... for example <br>
+ function imaginarySquareRoot(number) { <br>
+  'use strict';<br>
+  try {<br>
+      return String(squareRoot(number));<br>
+  } catch(error) {<br>
+      return squareRoot(-number)+'i';<br>
+  }<br>
+}<br><br>
+Finally will always execute after the try or catch and will be useful if something should happen in both cases, see below <br>
+function imaginarySquareRoot(number) {<br>
+  'use strict';<br>
+  let answer;<br>
+  try {<br>
+      answer = String(squareRoot(number));<br>
+  } catch(error) {<br>
+      answer = squareRoot(-number)+"i";<br>
+  } finally {<br>
+      return `+ or - ${answer}`;<br>
+  }<br>
+}<br>
+We can always run tests to check for valid functions <br>
+Test-Driven Development TDD <br>
+1. Write tests (that initially fail) <br>
+2. Write code to pass the tests<br>
+3. Refactor the code<br>
+4. Test refactored code<br>
+5. Write more tests for new features<br>
+one application --  Jest - Facebook framework (nmp install -g jest) <br>
+Example showing factors <br>
+function factorsOf(n) { <br>
+  const factors = [];<br>
+  for (let i=1; i <= n ; i++) { // change on this line<br>
+      if (n/i === Math.floor(n/i)){<br>
+      factors.push(i);<br>
+      }<br>
+  }<br>
+  return factors;<br>
+}<br>
+Dont foget to tidy up code - refactoring <br>
+then, implement sort();  as well as throwing some exceptions <br>
+function factorsOf(n) { <br>
+  const factors = [];<br>
+  for (let i=1 , max = Math.sqrt(n); i <= max ; i++) {<br>
+      if (n%i === 0){<br>
+      factors.push(i,n/i);<br>
+      }<br>
+  }<br>
+  return factors.sort((a,b) => a - b);<br>
+}<br>
+and to check if is prime <br>
+function isPrime(n) { <br>
+  try{<br>
+      return factorsOf(n).length === 2;<br>
+  } catch(error) {<br>
+      return false;<br>
+  }<br>
+  }<br>
+</p>
+<hr>
+<p id="summary">
+  <b>Chapter Summary</b><br>
+ - Novice to Ninja JavaScript <br>
+Bugs are unavoidable in code, and it’s best to find them early rather than later.<br>
+JavaScript can be put into strict mode using the string "use strict" . This can be used in a whole file or just a single function.<br>
+Linting tools can be used to ensure your code follows good practice and conventions.<br>
+Feature detection can check whether a method is supported before calling it, helping to avoid an exception being thrown.<br>
+The console and browser’s built-in debugging tool can be used to interactively find and fix bugs in code.<br>
+Exceptions can be thrown using the throw statement.<br>
+An error object is created when an exception occurs.<br>
+Any code placed inside a try block will pass any error objects to a catch block when an exception occurs. Any code inside a finally block will run if an exception does or does not occur.<br>
+Test-driven development is the practice of writing tests that fail, then writing the code that passes the test, then refactoring the code every time a new feature is implemented.<br>
+</p>
+</div>
+
+
+  <h2>Find HTML Elements Using document.forms</h2>
+  <button onclick="displayDate()">Click here for date information</button>
+  <p id="date"></p>
+  <form id="frm1">
+    First name: <input type="text" name="fname" value="Donald"><br>
+    Last name: <input type="text" name="lname" value="Duck"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <p>Click "Try it" to display the value of each element in the form.</p>
+
+  <button onclick="myFunction()">Try it</button>
+
+  <p id="demo"></p>
+
+  <script>
     function myFunction() {
       var x = document.forms["frm1"];
       var text = "";
       var i;
-      for (i = 0; i < x.length ;i++) {
+      for (i = 0; i < x.length; i++) {
         text += x.elements[i].value + "<br>";
       }
       document.getElementById("demo").innerHTML = text;
     }
-    </script>
-    <h1 id="id1">My Heading changes with a button click</h1>
-    <button type="button"
-    onclick="document.getElementById('id1').style.color = 'blue'">
+  </script>
+  <h1 id="id1">My Heading changes with a button click</h1>
+  <button type="button" onclick="document.getElementById('id1').style.color = 'blue'">
     Click Me!</button>
-    </body>
+</body>
+
 </html>
+
+<!-- Week 5 Testing and Debugging 
+Errors, exceptions, and warnings
+The importance of testing and debugging
+Strict mode
+Debugging in the browser
+Error objects
+Throwing exceptions
+Exception handling
+Testing frameworks 
+-->

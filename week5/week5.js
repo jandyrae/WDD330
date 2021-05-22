@@ -1,12 +1,12 @@
 // Finding HTML Elements
-// Method	Description
+// Method	                        Description
 // document.getElementById(id) //	Find an element by element id
 // document.getElementsByTagName(name)	Find elements by tag name
 // document.getElementsByClassName(name)	Find elements by class name
 
 
 // Changing HTML Elements
-// Property	Description
+// Property	                        Description
 // element.innerHTML =  new html content	Change the inner HTML of an element
 // element.attribute = new value	Change the attribute value of an HTML element
 // element.style.property = new style	Change the style of an HTML element
@@ -15,7 +15,7 @@
 
 
 // Adding and Deleting Elements
-// Method	Description
+// Method	                        Description
 // document.createElement(element)	Create an HTML element
 // document.removeChild(element)	Remove an HTML element
 // document.appendChild(element)	Add an HTML element
@@ -24,14 +24,14 @@
 
 
 // Adding Events Handlers
-// Method	Description
+// Method	                        Description
 // document.getElementById(id).onclick = function(){code}	Adding event handler code to an onclick event
 // Finding HTML Objects
 // The first HTML DOM Level 1 (1998), defined 11 HTML objects, object collections, and properties. These are still valid in HTML5.
 
 // Later, in HTML DOM Level 3, more objects, collections, and properties were added.
 
-// Property	Description	DOM
+// Property	                    Description	DOM
 // document.baseURI	Returns the absolute base URI of the document	3
 // document.body	Returns the <body> element	1
 // document.cookie	Returns the document's cookie	1
@@ -69,3 +69,5 @@
 // document.links
 // document.scripts
 // document.title
+
+// exceptions produce stack traces
