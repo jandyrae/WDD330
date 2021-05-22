@@ -61,7 +61,7 @@ export default class Hikes {
   addHikeListener() {
     const childArray = Array.from(this.parentElement.children);
     childArray.forEach(child => {
-      child.addEventListener('touchend', e => {
+      child.addEventListener('click', e => {
         this.showOneHike(e.currentTarget.dataset.name);
       });
     });
@@ -70,7 +70,7 @@ export default class Hikes {
   buildBackButton() {
     const backbutton = document.createElement('button');
     backbutton.innerHTML = '&lt;- All Hikes';
-    backbutton.addEventListener('touchend', () => {
+    backbutton.addEventListener('click', () => {
       this.showHikeList();
     });
     backbutton.classList.add('hidden');
@@ -97,10 +97,10 @@ function renderOneHikeLight(hike) {
   item.classList.add('light');
   item.setAttribute('data-name', hike.name);
   // add a touch element 
-  item.addEventListener('touchend', event => {
+  item.addEventListener('click', event => {
     console.dir(event);
     console.dir(event.currentTarget);
-    item.addHikeListener();
+    item.addHikeListener;
   });
   item.innerHTML = ` <h2>${hike.name}</h2>
           <div class="image"><img src="${imgBasePath}${hike.imgSrc}" alt="${hike.imgAlt}"></div>
