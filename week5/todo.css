@@ -94,3 +94,9 @@ ul li.checked {
 .close:hover {
     background: khaki;
 }
+ 
+#count {
+    font-size: small;
+    color: blue;
+    
+}
