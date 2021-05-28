@@ -105,12 +105,12 @@ ul li.checked {
     font-size: small;
     color: rgb(160, 140, 140);
     width: 25%;
-    border-style: 1px solid black;
-    
-    
+    background-color: white;
+    border-radius: 10px;
+    border-style: none;
 }
 
 button {
     width: 25%;
-    
+    border-radius: 10px;
 }
