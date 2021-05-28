@@ -89,4 +89,4 @@ let count = '';
 count = document.querySelectorAll('li');
 let total = count.length;
 console.log(total); // shows in browser
-document.getElementById('count').innerHTML = 'You have ' + total + ' on your list.';
+document.getElementById('count').innerHTML = 'You have ' + total + ' tasks left.';

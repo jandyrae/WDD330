@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>TODO List</title>
-    <link rel="stylesheet" href="todo.css">
-    <script src="todo.js" defer></script>
+    <link rel='stylesheet' href='todo.css'>
+    <script src='todo.js' defer></script>
 </head>
 
 <body>
@@ -39,19 +39,19 @@
 
     <header>
         <h2>Make and keep your TODO list</h2>
-        <a href="../index.html">Back to Index</a>
+        <a href='../index.html'>Back to Index</a>
         <hr>
     </header>
-    <div class="container">
-        <div id="myDIV" class="header">
+    <div class='container'>
+        <div id='myDIV' class='header'>
             <h2>My To Do List</h2>
-            <div id="inputContainer"><input type="text" id="myInput" placeholder="Todo item...">
-                <div id="addItem" onclick="newItem()" class="addBtn">+</div>
+            <div id='inputContainer'><input type='text' id='myInput' placeholder='Todo item...'>
+                <div id='addItem' onclick='newItem()' class='addBtn'>+</div>
             </div>
-            <p id="warning">You must write something to add to the list!</p>
+            <p id='warning'>You must write something to add to the list!</p>
         </div>
 
-        <ul id="myUL">
+        <ul id='myUL'>
             <li>Work out</li>
             <li>Pay bills</li>
             <li>Call mom</li>
@@ -60,10 +60,12 @@
             <li>Organize garage</li>
         </ul>
         <!-- tasks left, sort by complete, option to show all -->
-        <h5 id='count'> </h5>
-        <button onclick="tasksLeft();">Tasks left</button>
+        <div id='bottomRow'>
+        <button id='count'> </button>
+        <button onclick='tasksLeft();'>Tasks left</button>
         <button>Completed</button>
         <button>Show All</button>
+    </div>
     </div>
 
 

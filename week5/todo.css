@@ -94,9 +94,23 @@ ul li.checked {
 .close:hover {
     background: khaki;
 }
- 
+
+#bottomRow {
+    display: flex;
+    flex-direction: row;
+    height: 50px
+}
+
 #count {
     font-size: small;
-    color: blue;
+    color: rgb(160, 140, 140);
+    width: 25%;
+    border-style: 1px solid black;
+    
+    
+}
+
+button {
+    width: 25%;
     
 }
