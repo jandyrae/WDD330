@@ -27,11 +27,11 @@ for (let i = 0; i < cross.length; i++) {
   }
 }
 
-// Add a 'checked' class when clicking on a list item
+// Toggles to a 'checked' class when clicking on a list item
 let list = document.querySelector('ul');
 list.addEventListener('click', function (event) {
   if (event.target.tagName == 'LI') {
-    event.target.classList.toggle('checked'); // tried to toggle
+    event.target.classList.toggle('checked'); 
   }
 }, false);
 
@@ -47,7 +47,10 @@ function newItem() {
   } else { // add to list li and remove warning
     document.getElementById('myUL').appendChild(li);
     document.getElementById('warning').style.display = 'none';
+    // here may be good to save to local storage
+
   }
+  // clear the text field when done 
   document.getElementById('myInput').value = '';
 
   let div = document.createElement('DIV');
@@ -90,3 +93,6 @@ count = document.querySelectorAll('li');
 let total = count.length;
 console.log(total); // shows in browser
 document.getElementById('count').innerHTML = 'You have ' + total + ' tasks left.';
+
+// Get all <li> elements in the document
+var x = document.querySelectorAll("li");
