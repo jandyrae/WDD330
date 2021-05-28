@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <!-- Over the next 2 weeks we will practice what we have learned so far by building a 
         small web application. For this first challenge we will all build a simple To Do tracking application.
 
@@ -35,44 +36,36 @@
         7. Schedule to provide yourself mile markers along the way to help you stay on target.
            * Review this Trello board. If you want to follow those steps, create a Trello account and copy the board to your account.
            * There are no dates assigned to the board. Assign yourself some due dates to make sure you complete the project in the allotted time. -->
+
     <header>
         <h2>Make and keep your TODO list</h2>
         <a href="../index.html">Back to Index</a>
         <hr>
     </header>
     <div class="container">
-        <ul>
-            <div id="addItem">
-                <button onclick="addItemToList();">+</button>
-            </div> 
-        <input type="checkbox" name="checkitem" class="checkItem"> 
-        <input type="text" id="addItem" placeholder="buy groceries" >
-        <button id="finished" onclick="checkOff();">Remove</button><br>
+        <div id="myDIV" class="header">
+            <h2>My To Do List</h2>
+            <div id="inputContainer"><input type="text" id="myInput" placeholder="Todo item...">
+                <div id="addItem" onclick="newItem()" class="addBtn">+</div>
+            </div>
+            <p id="warning">You must write something to add to the list!</p>
+        </div>
+
+        <ul id="myUL">
+            <li>Work out</li>
+            <li>Pay bills</li>
+            <li>Call mom</li>
+            <li>Buy milk</li>
+            <li>Read a book</li>
+            <li>Organize garage</li>
         </ul>
-        <div>
-            <button>Clear List Items</button>
-            <button>Show Completed Items</button>
-            <button>Still Need Attention</button>
-            <!-- tasks left, sort by complete, option to show all -->
-        </div>
-        <div>
-            <div id="myDIV" class="header">
-                <!-- <h2 style="margin:5px">My To Do List</h2> -->
-                <input type="text" id="myInput" placeholder="Title...">
-                <div onclick="newItem()" class="addBtn">+</div>
-              </div>
-              
-              <ul id="myUL">
-                <li>Hit the gym</li>
-                <li class="checked">Pay bills</li>
-                <li>Call mom</li>
-                <li>Buy milk</li>
-                <li>Read a book</li>
-                <li>Organize garage</li>
-              </ul>
-              
-        </div>
+        <!-- tasks left, sort by complete, option to show all -->
+        <button onclick="tasksLeft();">Tasks left</button>
+        <button>Sort Completed Items</button>
+        <button>Show All</button>
     </div>
+    
+    
 </body>
 
 </html>

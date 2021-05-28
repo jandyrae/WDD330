@@ -1,39 +1,12 @@
 
-// add line items on a button click to list
-function addItemToList(){
-const item = document.createElement("li");
-item.classList.add('items');
-item.addEventListener('onclick', event => {
-    item.innerHTML = `
-    <input type="checkbox" name="checkitem" class="checkItem" > 
-    <input type="text" id="addItem" placeholder="buy groceries" >
-    <button id="finished" onclick="checkOff();">Remove</button><br>
-    `;
-});
-return item;
-}
 
-function checkOff (){
-
-}
-
-// item.setAttribute("");
-
-
-function removeItem() {
-    // logic to remove checked item
-}
-
-function orderItems(){
-    
-}
-
-// Create a "close" button and append it to each list item
-let mylist = document.getElementsByTagName("li");
+// Create a close button and append it to each list item
+let mylist = document.getElementsByTagName("LI");
 for (let i = 0; i < mylist.length; i++) {
-  let div = document.createElement("div");
+  let div = document.createElement("DIV");
   let txt = document.createTextNode("X");
   div.className = "close";
+  // div.id = "checked";
   div.appendChild(txt);
   mylist[i].appendChild(div);
 }
@@ -47,11 +20,20 @@ for (let i = 0; i < close.length; i++) {
   }
 }
 
-// Add a "checked" symbol when clicking on a list item
+// click on li to cross out list item
+let cross = document.getElementsByClassName('checked');
+for (let i = 0; i < cross.length; i++) {
+  cross[i].onclick = function() {
+    let div = this.parentElement;
+    div.style.textDecoration = "line-through";
+  }
+}
+
+// Add a "checked" class when clicking on a list item
 let list = document.querySelector('ul');
-list.addEventListener('click', function(e) {
-  if (e.target.tagName === 'li') {
-    e.target.classList.toggle('checked');
+list.addEventListener('click', function(event) {
+  if (event.target.tagName == 'LI') {
+    event.target.classList.toggle('checked'); // tried to toggle
   }
 }, false);
 
@@ -62,14 +44,15 @@ function newItem() {
     let inputValue = document.getElementById("myInput").value;
     let t = document.createTextNode(inputValue);
     li.appendChild(t);
-    if (inputValue === '') {
-      alert("You must write something!");
-    } else {
+    if (inputValue === '') { // if no text added display warning
+      document.getElementById('warning').style.display = 'block';
+    } else { // add to list li and remove warning
       document.getElementById("myUL").appendChild(li);
+      document.getElementById('warning').style.display = 'none';
     }
     document.getElementById("myInput").value = "";
   
-    let div = document.createElement("div");
+    let div = document.createElement("DIV");
     let txt = document.createTextNode("X");
     div.className = "close";
     div.appendChild(txt);
@@ -82,3 +65,12 @@ function newItem() {
       }
     }
   }
+
+
+function tasksLeft() {
+  let done = document.querySelector('LI');
+ if (done.classList == 'checked') {
+   console.log(done);
+   done.parentElement.removeChild(done);
+ }
+} 
