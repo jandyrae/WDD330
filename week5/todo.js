@@ -51,7 +51,7 @@ function newItem() {
     document.getElementById('warning').style.display = 'none';
     // here may be good to save to local storage
     // saveList();
-    // countToDo();
+    // countToDo(); moved to div that holds list to update when ther was a change
 }
   
   // clear the text field when done 
@@ -68,7 +68,7 @@ function newItem() {
     close[i].onclick = function () {
       let div = this.parentElement;
     li.parentElement.removeChild(div);
-      // div.style.display = 'none';
+      // div.style.display = 'none'; // hides versus removes
     }
   }
 }
@@ -84,9 +84,9 @@ function tasksLeft() {
 }
 
 function showAll() {
-  let all = document.querySelector('li');
+  let all = document.querySelectorAll('li');
   all.forEach((item) => {
-    if (all.classList == 'checked' || all.classList == 'close') {
+    if (item.classList == 'checked' || item.classList == 'close') {
       // show hidden and active from localstorage
       // all.parentElement.
     }

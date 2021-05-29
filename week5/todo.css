@@ -98,7 +98,8 @@ ul li.checked {
 #bottomRow {
     display: flex;
     flex-direction: row;
-    height: 50px
+    height: 50px;
+    flex-wrap: wrap;
 }
 
 #count {
@@ -113,4 +114,10 @@ ul li.checked {
 button {
     width: 25%;
     border-radius: 10px;
+}
+
+header {
+    font-family: cursive;
+    font-size: x-large;
+    text-align: center;
 }
