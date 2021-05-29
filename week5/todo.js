@@ -51,7 +51,7 @@ function newItem() {
     document.getElementById('warning').style.display = 'none';
     // here may be good to save to local storage
     // saveList();
-    countToDo();
+    // countToDo();
 }
   
   // clear the text field when done 
