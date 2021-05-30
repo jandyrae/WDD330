@@ -31,7 +31,7 @@ for (let i = 0; i < cross.length; i++) {
 let list = document.querySelector('ul');
 list.addEventListener('click', function (event) {
   if (event.target.tagName == 'LI') {
-    event.target.classList.toggle('checked'); 
+    event.target.classList.toggle('checked');
   }
 }, false);
 
@@ -41,8 +41,6 @@ function newItem() {
   let li = document.createElement('LI');
   let inputValue = document.getElementById('myInput').value;
   let t = document.createTextNode(inputValue);
-  // let box = document.createTextNode('u25a2');
-  // let check = document.createTextNode('✔');
   li.appendChild(t);
   if (inputValue === '') { // if no text added display warning
     document.getElementById('warning').style.display = 'block';
@@ -50,14 +48,14 @@ function newItem() {
     document.getElementById('myUL').appendChild(li);
     document.getElementById('warning').style.display = 'none';
     // here may be good to save to local storage
-    // saveList();
-    // countToDo(); moved to div that holds list to update when ther was a change
-}
-  
+    saveList();
+    
+  }
+
   // clear the text field when done 
   document.getElementById('myInput').value = '';
 
- // create div for the x to clear the item from the list (append the text 'X') add to li above
+  // create div for the x to clear the item from the list (append the text 'X') add to li above
   let div = document.createElement('DIV');
   let txt = document.createTextNode('X');
   div.className = 'close';
@@ -67,7 +65,7 @@ function newItem() {
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function () {
       let div = this.parentElement;
-    li.parentElement.removeChild(div);
+    div.parentElement.removeChild(div);
       // div.style.display = 'none'; // hides versus removes
     }
   }
@@ -88,24 +86,29 @@ function showAll() {
   all.forEach((item) => {
     if (item.classList == 'checked' || item.classList == 'close') {
       // show hidden and active from localstorage
-      // all.parentElement.
+      // localStorage.getItem
+      // item.parentElement.
     }
   });
 }
 
 // to display how many items are on the list (doesn't update unless new add)
-function countToDo(){
-let count = document.querySelectorAll('li');
-let total = count.length;
-console.log(total); // shows in browser
-document.getElementById('count').innerHTML = 'You have ' + total + ' tasks left.';
+function countToDo() {
+  let count = document.querySelectorAll('li');
+  let total = count.length;
+  console.log(total); // shows in browser
+  document.getElementById('count').innerHTML = 'You have ' + total + ' tasks left.';
 }
 
-
+// saving the data entered to retrieve later
 function saveList() {
-  let itemName = document.getElementsByClassName('li').value;
-  let itemNumber = 0;
-  localStorage.setItem(itemNumber, itemName);
-  console.log(localStorage.getItem(itemName)); // see what saved
+    // grab the text in a variable and save to local storage
+    let saveText = document.getElementsByTagName('li').nodeValue;
+    let i = 0;
+    console.log(saveText);
+    localStorage.setItem(i++, saveText);
 }
 
+// trying to add a checkbox 
+  // let box = document.createTextNode('u25a2');
+  // let check = document.createTextNode('✔');
