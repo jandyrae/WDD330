@@ -1,0 +1,12 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.example{
+    margin: auto;
+    padding: 10px;
+    width: 35%;
+    background-color: ivory;
+    font-family: monospace;
+    border: 1px dotted lightcoral;
+    border-radius: 10px;
+}

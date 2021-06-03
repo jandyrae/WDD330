@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="week7.css">
+    <title>Week 7</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h2>Week 7 Stuff</h2>
+            <a href="../index.html">Back to Index</a><br>
+            <a href="ajax.html"> AJAX examples</a>
+        </nav><hr>
+    </header>
+    <p>
+        <h2>Function properties and methods</h2>
+        <p class="example">
+            var person = {<br>
+                fullName: function() {<br>
+                  return this.firstName + " " + this.lastName;<br>
+                }<br>
+              }<br>
+              var person1 = {<br>
+                firstName:"John",<br>
+                lastName: "Doe"<br>
+              }<br>
+              var person2 = {<br>
+                firstName:"Mary",<br>
+                lastName: "Doe"<br>
+              }<br>
+              person.fullName.call(person1);  // Will return "John Doe"<br><br>
+        </p>
+        <h2>Immediately Invoked function expressions (IIFE or 'iffy')</h2>
+        <p class="example">
+            (function(){<br>
+                const temp = 'World';<br>
+                console.log(`Hello ${temp}`);<br>
+                })();<br>
+                // 'Hello World'<br>
+        </p>
+        <h2>Self-defining functions</h2>
+       
+        <h2>Recursive functions</h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Callbacks</h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Promises</h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Async functions </h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Functions that return functions</h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Closures</h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Introduction to functional programming</h2>
+        <p class="example">
+            <br>
+
+        </p>
+        <h2>Currying</h2>
+        <p class="example">
+            <br>
+
+        </p>
+    </p>
+</body>
+
+</html>

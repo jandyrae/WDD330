@@ -1,0 +1,12 @@
+#container {
+    width: 75%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px dotted gray;
+    border-radius: 10px;
+}
+#output {
+    width: 70%;
+    margin: auto;
+}

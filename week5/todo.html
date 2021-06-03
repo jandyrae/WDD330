@@ -55,17 +55,15 @@
             <li>Work out</li>
             <li>Pay bills</li>
             <li>Call mom</li>
-            <li>Buy milk</li>
-            <li>Read a book</li>
-            <li>Organize garage</li>
         </ul>
         <!-- tasks left, sort by complete, option to show all -->
         <div id='bottomRow'>
-        <button id='count'></button>
-        <button onclick='tasksLeft();'>Tasks left</button>
-        <button>Completed</button>
-        <button onclick="showAll();">Show All</button>
-    </div>
+            <button id='count'></button>
+            <button onclick='tasksLeft();'>Tasks left</button>
+            <button onclick='showComplete();'>Completed</button>
+            <button onclick="showAll();">Show All</button>
+        </div>
+        <p id="display"></p>
     </div>
 
 
