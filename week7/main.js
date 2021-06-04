@@ -21,7 +21,7 @@ const outputDiv = document.getElementById('output');
 
 // the urls for each 
 const textURL = 'http://numbersapi.com/random';
-const apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cec6688f1b2e49611b637187174f926d';
+const apiURL = 'https://api.chucknorris.io/jokes/random';
 // 'https://api.chucknorris.io/jokes/random';
 
 
