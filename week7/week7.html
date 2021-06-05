@@ -15,77 +15,303 @@
             <h2>Week 7 Stuff</h2>
             <a href="../index.html">Back to Index</a><br>
             <a href="ajax.html"> AJAX examples</a>
-        </nav><hr>
+        </nav>
+        <hr>
     </header>
     <p>
         <h2>Function properties and methods</h2>
         <p class="example">
             var person = {<br>
-                fullName: function() {<br>
-                  return this.firstName + " " + this.lastName;<br>
-                }<br>
-              }<br>
-              var person1 = {<br>
-                firstName:"John",<br>
-                lastName: "Doe"<br>
-              }<br>
-              var person2 = {<br>
-                firstName:"Mary",<br>
-                lastName: "Doe"<br>
-              }<br>
-              person.fullName.call(person1);  // Will return "John Doe"<br><br>
+            fullName: function() {<br>
+            return this.firstName + " " + this.lastName;<br>
+            }<br>
+            }<br>
+            var person1 = {<br>
+            firstName:"John",<br>
+            lastName: "Doe"<br>
+            }<br>
+            var person2 = {<br>
+            firstName:"Mary",<br>
+            lastName: "Doe"<br>
+            }<br>
+            person.fullName.call(person1); // Will return "John Doe"<br><br>
         </p>
         <h2>Immediately Invoked function expressions (IIFE or 'iffy')</h2>
         <p class="example">
             (function(){<br>
-                const temp = 'World';<br>
-                console.log(`Hello ${temp}`);<br>
-                })();<br>
-                // 'Hello World'<br>
+            const temp = 'World';<br>
+            console.log(`Hello ${temp}`);<br>
+            })();<br>
+            // 'Hello World'<br>
+            <br><br>
+            // this function has two blocks, same var name that run independently<br>
+            (function() {<br>
+            // block A<br>
+            const name = 'Block A';<br>
+            console.log(`Hello from ${name}`);<br>
+            }());<br>
+            (function() {<br>
+            // block B<br>
+            const name = 'Block B';<br>
+            console.log(`Hello from ${name}`);<br>
+            }());<br>
+            // Hello from Block A<br>
+            // Hello from Block B<br>
         </p>
         <h2>Self-defining functions</h2>
-       
+        <p class="example">
+            function party(){<br> // this one runs
+            console.log('Wow this is amazing!');<br>
+            party = function(){<br> // then when it is set to a variable it only returns this new definition
+            console.log('Been there, got the T-Shirt');<br>
+            }<br>
+            }<br><br>
+            const beachParty = party; // note that the party function has not been invoked<br>
+            beachParty(); // the party() function has now been redefined, even though it hasn't been called
+            explicitly<br>
+            // 'Wow this is amazing!'<br>
+            party(); <br>
+            // 'Been there, got the T-Shirt'<br>
+            beachParty(); // but this function hasn't been redefined<br>
+            // 'Wow this is amazing!'<br>
+            beachParty(); // no matter how many times this is called it will remain the same<br>
+            // 'Wow this is amazing!'<br>
+            <br>
+            // Losing properties *****************
+            party.music = 'Classical Jazz'; // set a property of the function <br>
+            party(); <br>
+            // "Wow this is amazing!" <br>
+            party.music; // function has now been redefined, so the property doesn't exist <br>
+            // undefined <br>
+        </p>
+
         <h2>Recursive functions</h2>
         <p class="example">
             <br>
-
+            function factorial(n) {<br>
+            if (n === 0) {<br>
+            return 1;<br>
+            } else {<br>
+            return n * factorial(n - 1); // keeps going until it reaches the condition <br>
+            }<br>
+            }<br>
         </p>
         <h2>Callbacks</h2>
         <p class="example">
             <br>
-
+            Chapter 4. You’ll recall that they’re functions passed to other functions as arguments and then invoked
+            inside the function they are passed to <br> ****** remember nested callbacks can be ugly *******
+            function sing(song,callback) {<br>
+            console.log(`I'm singing along to ${song}.`);<br>
+            callback();<br>
+            }<br>
+            <br>
+            function dance() {<br>
+            console.log("I'm moving my body to the groove."); <br>
+            //( We’re just logging a simple message to the console in these examples, but these functions could be used
+            to do anything in a practical sense.)<br>
+            }<br>
+            <br>
+            sing('Let It Go',dance);<br><br>
+            // 'I'm singing along to Let It Go.'<br>
+            // 'I'm moving my body to the groove.'<br>
         </p>
         <h2>Promises</h2>
         <p class="example">
             <br>
-
+            A promise represents the future result of an asynchronous operation <br>
+            Promises don't do anything that can't already be achieved using callbacks, <br>
+            but they help simplify the process, and avoid the convoluted code that can <br>
+            result from using multiple callbacks. <br>
+            <br><br>
+            const promise = new Promise( (resolve, reject) => { <br>
+            // initialization code goes here<br>
+            if (success) {<br>
+            resolve(value);<br>
+            } else {<br>
+            reject(error);<br>
+            }<br>
+            });<br>returning one of two outcomes: <br>
+            Resolved ― the asynchronous operation was completed successfully. <br>
+            Rejected ― the asynchronous operation didn’t work as expected, wasn't successfully completed or resulted in
+            an error. <br>
+            // an example <br><br>
+            const dice = {<br>
+            sides: 6,<br>
+            roll() {<br>
+            return Math.floor(this.sides * Math.random()) + 1;<br>
+            }<br>
+            }<br>
+            console.log('Before the roll'); <br>
+            const promise = new Promise( (resolve,reject) => { <br>
+            const n = dice.roll();<br>
+            setTimeout(() => {<br>
+            (n > 1) ? resolve(n) : reject(n);<br>
+            }, n*1000);<br>
+            });<br>
+            promise.then( result => console.log(`I rolled a ${result}`) )
+            .catch( result => console.log(`Drat! ... I rolled a ${result}`) ); <br>
+            console.log('After the roll'); <br>
         </p>
         <h2>Async functions </h2>
         <p class="example">
             <br>
-
+            Allowing more than one process to happen (still single threaded though), and more importantly out of order -
+            callbacks can handle some of this too. <br>
+            function wait(message, callback, seconds){ <br>
+            setTimeout(callback,seconds * 1000); <br>
+            console.log(message); <br>
+            } <br>
+            function selfDestruct(){ <br>
+            console.log('BOOOOM!'); <br>
+            } <br><br>
+            invoke the wait() function then log a message to the console, we can see how JavaScript works
+            asynchronously: <br>
+            wait('This tape will self-destruct in five seconds ... ', selfDestruct, 5); <br>
+            console.log('Hmmm, should I accept this mission or not ... ?'); <br>
+            // 'This tape will self-destruct in five seconds ... ' <br>
+            // 'Hmmm, should I accept this mission or not ... ? ' <br>
+            // 'BOOOOM!' <br>
         </p>
         <h2>Functions that return functions</h2>
         <p class="example">
             <br>
-
+            // this one uses eval() that will give the scope valuation of a string.<br>
+            const x = 1;<br>
+            function evalAndReturnX(code) {<br>
+            eval(code);<br>
+            return x;<br>
+            }<br>
+            <br><br>
+            console.log(evalAndReturnX("var x = 2"));<br>
+            // → 2<br>
+            console.log(x);<br>
+            // → 1<br><br><br>
+            // this is a function constructor that takes in the comma separated arguements and following is the function
+            - no scope problems here<br>
+            let plusOne = Function("n", "return n + 1;");<br>
+            console.log(plusOne(4));<br>
+            // → 5<br>
+            ***************************** <br>
+            function greeter(greeting = 'Hello') {<br>
+            return function() {<br>
+            console.log(greeting);<br>
+            }<br>
+            }<br>
+            const englishGreeter = greeter();<br>
+            englishGreeter();<br>
+            // Hello<br>
+            const frenchGreeter = greeter('Bonjour');<br>
+            frenchGreeter();<br>
+            // Bonjour<br>
+            const germanGreeter = greeter('Guten Tag');<br>
+            germanGreeter();<br>
+            // Guten Tag<br>
         </p>
         <h2>Closures</h2>
         <p class="example">
+            <br>Closures are one of JavaScript’s most powerful features <br>
+            Functions declared from within another function have access to any variables declared in the outer
+            function’s scope. <br>
             <br>
+            function outer() {<br>
+            const outside = 'Outside!';<br>
+            function inner() {<br>
+            const inside = 'Inside!';<br>
+            console.log(outside);<br>
+            console.log(inside);<br>
+            }<br>
+            return inner; <br>
+            } <br>
+            const closure = outer(); // now assign a variable to the return value of the outer() function <br>
+            It now has access to the variables created insideboththe outer() and inner() functions <br>
+            closure();<br>
+            // Outside!<br>
+            Inside!<br>
+            // This allows some skirting around scope and gives access to inside variables. <br>
+            function closure() {<br>
+            const a = 1.8;<br>
+            const b = 32;<br>
+            return c => c * a + b;<br>
+            }<br>
+            const toFahrenheit = closure();<br>
+            toFahrenheit(30); // 86 <br>
 
         </p>
         <h2>Introduction to functional programming</h2>
         <p class="example">
             <br>
-
+            JavaScript has always supported functional-style programming due to functions being first-class objects.
+            <br>
+            The ability to pass functions as arguments, return them from other functions, and use anonymous functions
+            <br>
+            and closures, are all fundamental elements of functional programming that JavaScript excels at. <br>
+            PURE FUNCTIONS <br>
+            1. return value of a pure function should only depend on the values provided as arguments <br>
+            2. There are no side-effects. A pure function doesn't change any values or data elsewhere in the program.
+            <br>
+            3. Referential transparency. Given the same arguments, a pure function will always return the same result.
+            <br>
+            // example <br>
+            function reverse(string) {<br>
+            return string.split('').reverse().join('');<br>
+            }<br>
+            const message = 'Hello JavaScript';<br>
+            reverse(message); // 'tpircSavaJ olleH'<br>
+            message // hasn't changed // 'Hello JavaScript'<br>
         </p>
         <h2>Currying</h2>
         <p class="example">
             <br>
-
+            Currying allows you to turn a single function into a series of functions instead. <br>
+            This is useful if you find that you’re frequently calling a function with the same argument. <br>
+            For example, the following multiplier() function is a generic function that returns the product of two
+            numbers that are provided as arguments: <br>
+            <br>
+            function multiplier(x,y) { <br>
+            return x * y; <br>
+            } <br> // calculate a tax rate of 22% on a £400 sale using 0.22 and 400 as arguments <br>
+            const tax = multiplier(0.22,400); // 88 <br> <br>
+            // code at the start that allows it to be curried <br>
+            function multiplier(x,y) {<br>
+            if (y === undefined) {<br>
+            return function(z) {<br>
+            return x * z;<br>
+            }<br>
+            } else {<br>
+            return x * y;<br>
+            }<br>
+            }<br>
         </p>
-    </p>
+        <h2>Chapter Summary</h2>
+        <p class="example"> <br>
+            <br> * Functions have built-in properties such as length , but can have custom properties added.
+            <br> * All functions have call() and apply() methods that can invoke a function with the value of this bound
+            to an object that is provided as an argument.
+            <br> * Immediately Invoked Function Expressions or IIFEs are functions that are enclosed in parentheses and
+            immediately followed by double parentheses so they’re invoked. They are useful for namespacing variables and
+            setting default values.
+            <br> * Functions are able to dynamically redefine themselves in the body of the function, depending on
+            certain conditions.
+            <br> * A recursive function will keep invoking itself until a certain condition is met.
+            <br> * A callback is a function that’s provided as an argument to another function.
+            <br> * Callbacks are frequently used in asynchronous programming as part of the event loop. This means that
+            a program can continue to run in a single thread while waiting for another task to be completed.
+            <br> * Promises can be used instead of callbacks to deal with multiple asynchronous actions in sequence.
+            They also provide a nicer mechanism for handling errors.
+            <br>* Functions that return other functions are known as higher-order functions.
+            <br>* A closure is the process of keeping a reference to a variable available outside the scope of the
+            function it was originally defined in.
+            <br>* A generator is created by placing an asterisk character (*) after the function keyword.
+            <br>* A generator function will return an iterator object that provides a next() method, which returns the
+            next value in a sequence that is defined in the generator function.
+            <br>* unctional programming involves breaking processes down into steps that can be applied as a series of
+            functions.
+            <br>* Pure functions are functions that don't rely on the state of the code they are called from, have no
+            side-effects, and always give the same result when given the same arguments (referential transparency).
+            <br>* Currying or partial application is the process of applying one argument at a time to a function. A new
+            function is returned until all the arguments have been used.
+        </p>
 </body>
 
 </html>

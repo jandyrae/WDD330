@@ -36,8 +36,15 @@ apiButton.addEventListener('click', () => {
         )
         .catch(error => console.log('There was an error:', error))
 }, false);
-
-
+// to give a day name to the date
+const weekDay = function() {
+    const names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+                   "Thursday", "Friday", "Saturday"];
+    return {
+      name(number) { return names[number]; },
+    //   number(name) { return names.indexOf(name); }
+    };
+  }();
 // when the data was pulled
 let dateTime = new Date();
 document.getElementById('dateTime').innerHTML = "At Last Sync: " + dateTime.getDate() + "/" +
