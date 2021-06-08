@@ -21,9 +21,8 @@ body {
     font-size: 30px; 
     border-radius: 10px; 
     width: 25%;
-    box-shadow: 5px 5px 5px grey;
+    box-shadow: 5px 5px 5px;
     
-
 }
 img {
     width: auto;
@@ -34,5 +33,5 @@ img {
     right: 0;
 }
 a:hover {
-    font-size: 150%;
+    font-size: 120%;
 }
