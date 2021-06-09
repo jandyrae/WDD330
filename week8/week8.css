@@ -21,6 +21,14 @@ is the same as
 .ad-ad2 h1 span {
     transition: transform 0.2s ease-out 50ms;
 } but remember order matters
+@ rules for font-face
+@font-face {
+    font-family: 'fontName';
+    src: source;
+    font-weight: weight;
+    font-style: style;
+    unicode-range: characters;
+}
 */
 p {
     text-justify: auto;
@@ -117,4 +125,12 @@ div:hover {
 @keyframes mymove {
   from {left: 0px;}
   to {left: 900px;}
+}
+div.div {
+    all: revert;
+    background-color: burlywood;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+    width: 70%;
 }
