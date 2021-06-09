@@ -94,7 +94,7 @@ function showAll() {
   });
 }
 
-function showComplete(){
+function showComplete() {
   let completed = localStorage.getItem(myTodoList);
   // let completedItems = completed.filter(i => i.id == 'complete');
   // console.log(completedItems);
