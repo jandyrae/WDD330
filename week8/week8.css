@@ -1,0 +1,120 @@
+/* The translate(x,y) function moves an element x from the left, and y from the top:
+transform: translate(45px, -45px); 
+ to move an element vertically or horizontally, you can use the translatex or translatey 
+ transform: translateX(45px);
+ transform: scale(1.5, 0.25);
+ note that you wouldn't declare a new transform...but add on with spacing
+ transform: rotate(10deg) translateX(40px) scale(1.5); 
+ transform: skew(15deg, 4deg);
+ you can set the origin for transform with 
+ transform-origin: 0 0;
+ transition-timing-function: ease-out;
+ transition-delay: 50ms;
+ 
+ .ad-ad2 h1 span {
+    transition-property: transform; 
+    transition-duration: 0.2s;  
+    transition-timing-function: ease-out;
+    transition-delay: 50ms;
+}
+is the same as
+.ad-ad2 h1 span {
+    transition: transform 0.2s ease-out 50ms;
+} but remember order matters
+*/
+p {
+    text-justify: auto;
+    text-align: center;
+}
+
+div {
+    margin: auto;
+    text-align: center;
+    color: bisque;
+    padding-top: 20px;
+    width: 100px;
+    height: 100px;
+    background: rgb(110, 90, 90);
+    transition: width 2s, height 2s, transform 2s;
+    border-radius: 10px;
+}
+div:hover {
+    width: 500px;
+    height: 500px;
+    background-image: linear-gradient(rgb(66, 22, 22), rgb(252, 252, 252));
+    transform: rotate(180deg);
+  }
+
+  .example {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-direction: alternate;
+  }
+  
+  @keyframes example {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+  }
+  
+  #div1 {
+    width: 100px;
+    height: 50px;
+    background-color: red;
+    font-weight: bold;
+    position: relative;
+    animation: mymove 5s infinite;
+  }
+
+  #div2 {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(98, 0, 255);
+    font-weight: bold;
+    position: relative;
+    animation: mymove 5s infinite;
+  }
+
+  #div3 {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(221, 138, 42);
+    font-weight: bold;
+    position: relative;
+    animation: mymove 5s infinite;
+  }
+
+  #div4 {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(50, 231, 201);
+    font-weight: bold;
+    position: relative;
+    animation: mymove 5s infinite;
+  }
+
+  #div5 {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(20, 8, 54);
+    font-weight: bold;
+    position: relative;
+    animation: mymove 5s infinite;
+  }
+
+#div1 {animation-timing-function: linear;}
+#div2 {animation-timing-function: ease;}
+#div3 {animation-timing-function: ease-in;}
+#div4 {animation-timing-function: ease-out;}
+#div5 {animation-timing-function: ease-in-out;}
+
+@keyframes mymove {
+  from {left: 0px;}
+  to {left: 900px;}
+}
