@@ -179,6 +179,7 @@ div.div {
     margin: auto;
     width: 70%;
 }
+
 canvas {
     margin: auto;
    width: a 300px;;
@@ -186,13 +187,20 @@ canvas {
    border: dotted 1px green;
    
 }
+
 div.canvas {
     all: revert;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
+
 button {
     width: 500px;
+    margin: auto;
+}
+
+svg {
+    width: fit-content;
     margin: auto;
 }
