@@ -1,0 +1,22 @@
+#square {
+    margin: 200px;
+    width: 200px;
+    height: 200px;
+    background: #d26;
+}
+
+#square2 {
+    margin: 200px;
+    width: 200px;
+    height: 200px;
+    background: rgb(22, 65, 77);
+}
+
+#square3 {
+    margin: 200px;
+    width: 200px;
+    height: 200px;
+    background: #cc0;
+    animation: spin 22s linear infinite;
+}
+@keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(3600deg); } }

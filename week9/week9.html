@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="week9.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h2>Week 9 Stuff</h2>
+            <a href="../index.html">Back to Index</a>
+            <div>
+                <a href="animation.html">Animation Example</a>
+            </div>
+            <div>
+                <a href="../week4/quizninja4.html">QuizNinja</a>
+            </div>
+        </nav>
+        <hr>
+    </header>
+    <div class="notesContainer">
+        <div id="windowObj">
+            <section>
+                <h3>The Browser Object Model</h3> <br>
+                <p>BOM - The BOM Only Makes Sense in a Browser Environment
+                    Utilizing global variables <br>
+                    x = 6; // creating the global variable (scope is the whole window) <br>
+                    window.x; // yields 6 <br>
+                    window.x === x; // true <br>
+                    <br> Methods of the global obj - isNAN() and parseInt() - these are also methods of the Number
+                    object (Number.isNAN(4.2)// false)<br>
+                    window.parseInt(4.2); // 4 <br>
+                    window.isNaN(4.2); // false <br>
+                    These can produce dialogs in the browsers: alert() , confirm() , and prompt() <br>
+                </p>
+                <h3>Finding out browser information </h3><br>
+                <p>
+                    window.location.href // "https://www.sitepoint.com/premium/books/javascript-novice-to-ninja" <br>
+                    or assignment window.location.href = 'https://www.sitepoint.com/javascript/' <br>
+                    window.location.protocol // "https:" <br>
+                    window.location.host // "www.sitepoint.com"<br>
+                    window.location.hostname // similar to host without the port# <br>
+                    window.location.port <br>
+                    window.location.pathname // "/premium/books/javascript-novice-to-ninja"<br>
+                    window.location.search // "?q=javascript&limit=24&offset=0&page=1&
+                    content_types[]=All&slugs[]=all&states[]=available&order=" <br>
+                    This was a search for javascript<br><br>
+                    There are methods that can be used with the window.location <br>
+                    reload(), assign(), replace(), toString() <br>
+                </p>
+                <h3>Browser history</h3> <br>
+                <p>
+                    window.history property can be used to access informtion about current browser history... <br>
+                    window.history.length // how many pages were visited prior <br>
+                    window.history.go(1); // goes forward 1 page <br>
+                    window.history.go(0); // reloads the current page <br>
+                    window.history.go(-1); // goes back 1 page <br>
+                </p>
+                <h3>Controlling windows</h3><br>
+                <p>
+                    window.open() can open a new window <br>
+                    and can even be given parameters as attributes <br>
+                    const popup = window.open('https://sitepoint.com','
+                    SitePoint','width=400,height=400,resizable=yes'); <br>
+                    popup.close(); // if there is a reference to it <br>
+                    window.moveTo(0,0); // top left <br>
+                    and <br>
+                    window.resizeTo(600,400); // resize using hight and width <br>
+                    window.screen.height; // 1024<br>
+                    window.screen.width; // 1280<br>
+                    The availHeight and availWidth can be used to find the height and width of the screen, excluding any
+                    operating system menus:<br>
+                    window.screen.availWidth; // 1280<br>
+                    window.screen.availHeight; // 995<br>
+                    The colorDepth property can be used to find the color bit depth of the user’s monitor, <br>
+                    although there are few use cases for doing this other than collecting user statistics:<br>
+                    window.screen.colorDepth;<br>
+                    ********************************<br>
+                    Don't forget, each window contains a document object.
+                </p>
+                <h3>Cookies</h3><br>
+                <p>
+                    document.cookie = 'name=Superman';<br>
+                    // "name=Superman"<br>
+                    The document.cookie property acts like a special type of string. Assigning another cookie to it
+                    won’t overwrite the entire property,<br> it will just append it to the end of the string. So we can
+                    add more cookies by assigning them to document.cookie :
+                    <br>
+                    document.cookie = 'hero=true';<br>
+                    // "hero=true"<br>
+                    document.cookie = 'city=Metropolis';<br>
+                    // "city=Metropolis"<br>
+                    To change the cookie value just access the exact key and reference a new value <br>
+                    document.cookie = 'name=Batman' // "name=Batman"<br>
+                    document.cookie = 'city=Gotham' // "city=Gotham"<br>
+                    Reading Cookies<br>
+                    To see the current contents of the cookie jar, simply enter document.cookie :<br>
+
+                    document.cookie: // "name=Batman; hero=true; city=Gotham"<br><br>
+                    We can use the split method to break the string into an array containing each name/value pair, then
+                    use a for of loop to iterate through the array:<br>
+                    <br>
+                    const cookies = document.cookie.split("; ");<br>
+                    for (crumb of cookies){<br>
+                    const [key,value] = crumb.split("=");<br>
+                    console.log(`The value of ${key} is ${value}`);<br>
+                    } <br>// The value of name is Batman
+                    <br> The value of hero is true
+                    <br>The value of city is Gotham <br><br>
+                    There are some keywords that change functionality of cookies: path, domain, domainName, secure, expires or (max-age) <br><br>
+                    <a href="https://www.sitepoint.com/premium/books/javascript-novice-to-ninja-2nd-edition/read/9/k01nwurk?fromShare=true"> Cookies </a>
+                </p>
+                <h3>Timing functions</h3><br>
+                <p>
+                    window and scheduling methods for execution <br>
+                    window.setTimeout() <br>
+                    window.setTimeout( () => alert("Time's Up!"), 3000); // 4 <br>
+                    The number returned is an ID that references that timeout, you can use that number to clear the timeout. <br>
+                    window.clearTimeout(4); <br>
+
+
+                </p>
+                <h3>Summary</h3>
+                <p>
+* The window object is the global object in a browser.<br>
+* Global variables are actually properties of the window object in a browser environment.<br>
+ alert , confirm() , and prompt() are all methods of the window object, and open dialogs that halt the execution of the program.<br>
+* The window.navigator object gives information about the user’s browser and operating system, although it can be unreliable.<br>
+* The window.location object provides information about the URL of the current page.<br>
+* The window.history object keeps information about the pages that have been visited in the session.<br>
+* You can open, close, resize, and move windows (although, this doesn’t mean you should!).<br>
+* The window.screen object provides information about the user’s screen.<br>
+ document.write() is an archaic method of writing text to the document and should be avoided.<br>
+* Cookies can be used to store small pieces of information between requests using the document.cookie property.<br>
+* The window.setTimeout() method can be used to invoke a function after a set amount of time. It can be canceled using the clearTimeout() method.<br>
+* The window.setInterval() method can be used to repeatedly invoke a function. It can be stopped using the clearInterval() method.<br>
+* The window.requestAnimationFrame() method can be used to produce smooth and optimized animation by utilizing the browser's built-in graphics capabilities. It can be canceled using the cancelAnimationFrame() method.
+                </p>
+            </section>
+        </div>
+
+    </div>
+    <script src="week9.js"></script>
+</body>
+
+</html>

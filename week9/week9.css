@@ -1,0 +1,24 @@
+body {
+    background: linear-gradient(45deg, lightcoral,orange, blue)
+    
+}
+
+.notesContainer {
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    
+}
+
+#windowObj {
+    background-color: ivory;
+    box-shadow: lightcoral;
+    padding: 20px 100px;
+    border-radius: 5px;
+    
+}
+
+p {
+    color: midnightblue;
+    font-family: cursive;
+}
