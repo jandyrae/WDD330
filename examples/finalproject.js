@@ -109,7 +109,7 @@ apiAirQuality.addEventListener('click', () => {
             '\n Nitrogen monoxide: ' + data.list[0].components.no +
             '\n Nitrogen dioxide: ' + data.list[0].components.no2 +
             '\n Ozone: ' + data.list[0].components.o3 +
-            '\n Sulpher dioxide: ' + data.list[0].components.so2 +
+            '\n Sulphur dioxide: ' + data.list[0].components.so2 +
             '\n Ammonia: ' + data.list[0].components.nh3 
         )
         .catch(error => console.log('There was an error:', error))
