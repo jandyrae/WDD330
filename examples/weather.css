@@ -20,3 +20,8 @@ header {
     width: 70%;
     margin: auto;
 }
+/* Selects any valid <input> */
+input:valid {
+    background-color: powderblue;
+  }
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/:valid */
