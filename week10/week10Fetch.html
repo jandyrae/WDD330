@@ -21,6 +21,7 @@
             </div>
         </nav>
         <hr>
+        <img src="" alt="image of rainbow" id="rainbow">
     </header>
     <div class="container">
         <hi class="display-4 mb-4">Fetch API Sandbox</hi>
@@ -124,6 +125,20 @@
                 })
                 .then((response) => response.json())
                 .then((data) => console.log(data))
+        }
+        catchRainbow()
+        .then(response => {
+            console.log('yay!');
+        })
+        .catch(error => {
+            console.log('error!');
+            console.error(error);
+        }); // call the function that is a fetch using await and async
+// example from another video adding async and await
+        async function catchRainbow() {
+            const response = await fetch('rainbow.jpg');
+            const blob = await response.blob();
+            document.getElementById('rainbow').src = URL.createObjectURL(blob);
         }
     </script>
 </body>
