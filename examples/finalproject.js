@@ -22,6 +22,10 @@ const pollutionAPI = 'http://api.openweathermap.org/data/2.5/air_pollution?lat=3
 //     "list":[{"main":{"aqi":3},"components":{"co":178.58,"no":0.02,"no2":1.39,"o3":123.02,"so2":1.36,"pm2_5":6.86,"pm10":9.36,"nh3":0.17},
 //     "dt":1622948400}]
 // }
+const forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?zip=';
+const forecastAPI = ',us&units=imperial&cnt=3&appid=cec6688f1b2e49611b637187174f926d';
+
+
 // zipcodeapi.com/API information
 const zipToGpsApi = 'NsqYjsy8MHODlZlMYVwE5QxH1kztrt4oO74XnoshCAK1HzQOXZXe61O98x8OyDkY';
 const zipToGps = 'https://www.zipcodeapi.com/rest/' + zipToGpsApi + '/info.json/' + '93536' + 'degrees'; 
@@ -66,6 +70,7 @@ const zipToGps = 'https://www.zipcodeapi.com/rest/' + zipToGpsApi + '/info.json/
 const apiWeather = document.getElementById('weather');
 const apiAirQuality = document.getElementById('air');
 const outputDiv = document.getElementById('output');
+const apiForecast = document.getElementById('forecast');
  
 // listener for weather call
 apiWeather.addEventListener('click', () => {
@@ -115,24 +120,44 @@ apiAirQuality.addEventListener('click', () => {
         .catch(error => console.log('There was an error:', error))
 }, false);
 
-// to give a day name to the date
-const weekDay = function () {
-    const names = ["Sunday", "Monday", "Tuesday", "Wednesday",
-        "Thursday", "Friday", "Saturday"
-    ];
-    return {
-        name(number) {
-            return names[number];
-        },
-        //   number(name) { return names.indexOf(name); }
-    };
-}();
-
+// listener for forecast call
+apiForecast.addEventListener('click', () => {
+    let zip = parseInt(document.getElementById('zipCode').value);
+    var d = new Date(); 
+    fetch(forecastURL + zip + forecastAPI)
+        .then(response => {
+            outputDiv.innerHTML = 'Waiting for response...';
+            if (response.ok) {
+                return response;
+            }
+            throw Error(response.statusText);
+        })
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data);
+                        let output = '<h2 class="mb-4">Forecast</h2>';
+            document.getElementById('output').innerHTML = output += `
+            <ul>City: ${data.city.name}</ul>
+            <li></li>
+            <li>${data.list[0].main.temp} degrees Fahrenheit</li>
+            <li>Minimum Temperature: ${data.list[0].main.temp_min} degrees Fahrenheit</li>
+            <li>Maximum Temperature: ${data.list[0].main.temp_max} degrees Fahrenheit</li>
+            <li>Temperature Feels Like: ${data.list[0].main.feels_like} degrees Fahrenheit</li>
+            <li>Description: ${data.list[0].weather[0].description} </li>
+            <li>Wind: ${data.list[0].wind.speed} miles per hour </li>
+            <li>Sunrise: ${new Date(data.city.sunrise*1000).toLocaleString()}</li>  
+            <li>Sunset: ${new Date(data.city.sunset*1000).toLocaleString()}</li>
+            
+            `       
+        })
+        // document.getElementById('output').innerHTML = output;})
+        .catch(error => console.log('There was an error:', error))
+}, false);
 
 // when the data was pulled
 let dateTime = new Date();
-document.getElementById('dateTime').innerHTML = "At Last Sync: " + dateTime.getDate() + "/" +
-    (dateTime.getMonth() + 1) + "/" +
+document.getElementById('dateTime').innerHTML = "At Last Sync: " + (dateTime.getMonth() + 1) + "/" +
+    dateTime.getDate() + "/" +
     dateTime.getFullYear() + " @ " +
     dateTime.getHours() + ":" +
     dateTime.getMinutes() + ":" +
