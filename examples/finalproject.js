@@ -1,4 +1,4 @@
-const weatherURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 const weatherAPI = ',us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d';
 // My API key is cec6688f1b2e49611b637187174f926d
 // - API documentation https://openweathermap.org/api
@@ -14,7 +14,7 @@ const weatherAPI = ',us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d';
 // "sys":{"type":2,"id":2019646,"country":"GB","sunrise":1622692055,"sunset":1622751006},
 // "timezone":3600,"id":2643743,"name":"London","cod":200
 // }
-const pollutionAPI = 'http://api.openweathermap.org/data/2.5/air_pollution?lat=34.6017&lon=-118.231&appid=cec6688f1b2e49611b637187174f926d';
+const pollutionAPI = 'https://api.openweathermap.org/data/2.5/air_pollution?lat=34.6017&lon=-118.231&appid=cec6688f1b2e49611b637187174f926d';
 // example of pollution api lat=34.6017&lon=-118.231
 // ( Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.)
 // {
@@ -22,7 +22,7 @@ const pollutionAPI = 'http://api.openweathermap.org/data/2.5/air_pollution?lat=3
 //     "list":[{"main":{"aqi":3},"components":{"co":178.58,"no":0.02,"no2":1.39,"o3":123.02,"so2":1.36,"pm2_5":6.86,"pm10":9.36,"nh3":0.17},
 //     "dt":1622948400}]
 // }
-const forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?zip=';
+const forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?zip=';
 const forecastAPI = ',us&units=imperial&cnt=3&appid=cec6688f1b2e49611b637187174f926d';
 
 
