@@ -137,7 +137,9 @@
             console.error(error);
         }); // call the function that is a fetch using await and async
 // example from another video adding async and await
-        async function catchRainbow() {
+        
+
+async function catchRainbow() {
             const response = await fetch('rainbow.jpg');
             const blob = await response.blob();
             document.getElementById('rainbow').src = URL.createObjectURL(blob);

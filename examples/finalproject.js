@@ -1,3 +1,15 @@
+import {
+    getLocation,
+    lat,
+    lon
+} from './location.js';
+
+let latitude, longitude, zip, icon;
+
+
+getLocation('output'); // run the function that gives us values for lat and lon to be used here
+console.log(lat, lon); // TODO shows undefined, fix
+
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 const weatherAPI = ',us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d';
 // My API key is cec6688f1b2e49611b637187174f926d
@@ -15,8 +27,8 @@ const weatherAPI = ',us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d';
 // "timezone":3600,"id":2643743,"name":"London","cod":200
 // }
 
-const pollutionAPI = 'https://api.openweathermap.org/data/2.5/air_pollution?lat=34.6017&lon=-118.231&appid=cec6688f1b2e49611b637187174f926d';
-// example of pollution api lat=34.6017&lon=-118.231
+const pollutionAPI = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=cec6688f1b2e49611b637187174f926d`;
+// example of pollution api lat=34.601&lon=-118.231
 // ( Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.)
 // {
 //     "coord":{"lon":-118.231,"lat":34.6017},
@@ -24,84 +36,71 @@ const pollutionAPI = 'https://api.openweathermap.org/data/2.5/air_pollution?lat=
 //     "dt":1622948400}]
 // }
 const forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?zip=';
-const forecastAPI = ',us&units=imperial&cnt=3&appid=cec6688f1b2e49611b637187174f926d';
+const forecastAPI = ',us&units=imperial&cnt=5&appid=cec6688f1b2e49611b637187174f926d';
+// 
 
-// zipcodeapi.com/API information
-let zip = parseInt(document.getElementById('zipCode').value);
-let zipCode = document.getElementById('zipCode');
-// const zipToGpsApi = 'NsqYjsy8MHODlZlMYVwE5QxH1kztrt4oO74XnoshCAK1HzQOXZXe61O98x8OyDkY';
-const zipToGpsApi = 'js-xH3XF4hARHyUnFDIq9KgevWHvzEeGnUs2EhJUapVQ7rxZ8M8y8yBs2azl9VDayr8'; //cors
-const zipToGps = 'https://www.zipcodeapi.com/rest/' + zipToGpsApi + '/info.json/' + zip + 'degrees';
-//     "zip_code": "93536",
-//     "lat": 34.747368,
-//     "lng": -118.369063,
-//     "city": "Lancaster",
-//     "state": "CA",
-//     "timezone": {
-//         "timezone_identifier": "America/Los_Angeles",
-//         "timezone_abbr": "PDT",
-//         "utc_offset_sec": -25200,
-//         "is_dst": "T"
-//     },
-//     "acceptable_city_names": [{
-//             "city": "Del Sur",
-//             "state": "CA"
-//         },
-//         {
-//             "city": "Fairmont",
-//             "state": "CA"
-//         },
-//         {
-//             "city": "Metler Valley",
-//             "state": "CA"
-//         },
-//         {
-//             "city": "Neenach",
-//             "state": "CA"
-//         },
-//         {
-//             "city": "Quartz Hill",
-//             "state": "CA"
-//         }
-//     ],
-//     "area_codes": [
-//         661
-//     ]
-// }
+const oneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`;
+
+// const oneCallAPI = `&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`;
+const oneCallURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.601&lon=-118.231&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d';
 
 // DOM
 const apiWeather = document.getElementById('weather');
 const apiAirQuality = document.getElementById('air');
 const outputDiv = document.getElementById('output');
 const apiForecast = document.getElementById('forecast');
+const UVindex = document.getElementById('uv');
+const forecastOutput = document.getElementById('forecastOutput');
+
+let zipInput = document.getElementById('zipCode');
 
 
-// for zip code to gps coordinates
-zipCode.addEventListener('input', () =>{
-WindowOrWorkerGlobalScope.fetch(zipToGps)
-    .then(response => {
-        outputDiv.innerHTML = 'Waiting for response...';
-        if (response.ok) {
-            return response;
-        }
-        throw Error(response.statusText);
-    })
-    .then(response => response.json())
-    .then((data) => {
-        console.log(data);
-        let lat = data.coord.lat;
-        let lon = data.coord.lon;
-        console.log(lat,lon);
-        // outputDiv.innerHTML =
-        // `<h2> Given Coordinates in GPS ${lat} ${lon}</h2>`;
-    })
-    .catch(error => console.log('There was an error:', error));
+
+
+// for uv info from the onecall url
+UVindex.addEventListener('click', () => {
+    zip = parseInt(document.getElementById('zipCode').value);
+    // const onecall = oneCallURL + oneCallAPI;
+    fetch(oneCallURL) // onecall if i can get gps to load
+        .then(response => {
+            outputDiv.innerHTML = 'Waiting for response...';
+            if (response.ok) {
+                return response;
+            }
+            throw Error(response.statusText);
+        })
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data);
+            let output = '<h2 class="mb-4">Sun Conditions: </h2>';
+            outputDiv.innerHTML = output +=
+                `<ul>
+            <li>Currently <b>${data.current.temp}°F</b></li>
+            <li>UV Index <b>${data.current.uvi} </b></li>
+            <li>Cloud Covering <b>${data.current.clouds}% of sky</b></li>
+            <li> <b>${data.current.weather[0].description} </b></li>
+            <div id='icon'>${data.current.weather[0].icon}</div>
+            `;
+            icon = data.current.weather[0].icon;
+        
+        return fetch(`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`)}) 
+        .then(response => {
+            // outputDiv.innerHTML = 'Waiting for response...';
+            if (response.ok) {
+                return response;
+            }
+            throw Error(response.statusText);
+        })
+    
+        .then(response => response.blob())
+        .then((img) => document.getElementById('icon').src = URL.createObjectURL(img))
+        .catch(error => console.log('There was an error:', error));
 })
 
-// zipCode();
+
 // listener for weather call
 apiWeather.addEventListener('click', () => {
-    let zip = parseInt(document.getElementById('zipCode').value);
+    zip = parseInt(document.getElementById('zipCode').value);
     fetch(weatherURL + zip + weatherAPI)
         .then(response => {
             outputDiv.innerHTML = 'Waiting for response...';
@@ -112,24 +111,31 @@ apiWeather.addEventListener('click', () => {
         })
         .then(response => response.json())
         .then((data) => {
+            latitude = data.coord.lat;
+            longitude = data.coord.lon;
             let output = '<h2 class="mb-4">Weather</h2>';
             outputDiv.innerHTML = output +=
                 `<h3>Getting weather conditions for: </h3>
             <ul>
             <li> <b>${ data.name} </b></li>
             <li>Weather Description: <b>${ data.weather[0].description} </b></li>
-            <li>Temp in Farenheit ${ data.main.temp } and feels like  ${ data.main.feels_like} </li>
-            <li>Barometric pressure of ${ data.main.pressure} with humidity at  ${ data.main.humidity }% </li>
-            <li>Current visibility ${ data.visibility}  and wind speed  ${ data.wind.speed} MPH</li>
+            <li><b>${ data.main.temp }°F and feels like  ${ data.main.feels_like}°F </b></li>
+            <li>Barometric pressure of <b>${ data.main.pressure} with humidity at  ${ data.main.humidity }% </b></li>
+            <li>Current visibility <b>${ data.visibility}  and wind speed  ${ data.wind.speed} MPH</b></li>
             `
+            return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`)
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
         })
         .catch(error => console.log('There was an error:', error))
 }, false);
 
 // listener for air quality call
 apiAirQuality.addEventListener('click', () => {
-    fetch(pollutionAPI)
-        .then(console.log(pollutionAPI))
+    zip = parseInt(document.getElementById('zipCode').value);
+    fetch(weatherURL + zip + weatherAPI)
         .then(response => {
             outputDiv.innerHTML = 'Waiting for response...';
             if (response.ok) {
@@ -139,12 +145,33 @@ apiAirQuality.addEventListener('click', () => {
         })
         .then(response => response.json())
         .then((data) => {
+            latitude = data.coord.lat;
+            longitude = data.coord.lon;
+            return fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=cec6688f1b2e49611b637187174f926d`)
+                .then(console.log(pollutionAPI))
+                .then(response => {
+                    outputDiv.innerHTML = 'Waiting for response...';
+                    if (response.ok) {
+                        return response;
+                    }
+                    throw Error(response.statusText);
+                })
+        })
+        .then(response => response.json())
+        .then((data) => {
             let output = '<h2 class="mb-4">Air Quality</h2>';
             outputDiv.innerHTML = output +=
-                `<h3>Getting Air Quality conditions for global position: </h3>
-            <ul>${ data.coord.lon } longitude and ${ data.coord.lat } latitude
-            <li>Air Quality value:  ${data.list[0].main.aqi }</li>
-            <li><i>( 1 = Good,  2 = Fair,  3 = Moderate,  4 = Poor,  5 = Very Poor )</i></li>
+                `<h3>Air Quality conditions</h3>
+            <ul>
+            <li>Air Quality Index: <b> ${data.list[0].main.aqi }</b></li>
+            <li style="color:blue";>
+            <ul><i>
+            <li>1 = Good</li>   
+            <li>2 = Fair</li>   
+            <li>3 = Moderate</li>   
+            <li>4 = Poor</li>  
+            <li>5 = Very Poor</li>
+            </i></ul>
             <li>Carbon Monoxide: ${ data.list[0].components.co }</li>
             <li>Nitrogen monoxide: ${ data.list[0].components.no }</li>
             <li>Nitrogen dioxide: ${ data.list[0].components.no2}</li>
@@ -158,44 +185,86 @@ apiAirQuality.addEventListener('click', () => {
 
 // listener for forecast call
 apiForecast.addEventListener('click', () => {
-    let zip = parseInt(document.getElementById('zipCode').value);
-    var d = new Date();
+    zip = parseInt(document.getElementById('zipCode').value);
     fetch(forecastURL + zip + forecastAPI)
         .then(response => {
-            outputDiv.innerHTML = 'Waiting for response...';
+            // outputDiv.innerHTML = 'Waiting for response...';
             if (response.ok) {
                 return response;
             }
             throw Error(response.statusText);
         })
         .then(response => response.json())
-        .then((data) => {
+
+        .then((data) => { //need to do a for each or something here or  for i in...
             console.log(data);
             let output = '<h2 class="mb-4">Forecast</h2>';
-            document.getElementById('output').innerHTML = output += `
+            forecastOutput.innerHTML = output += `
             <ul>
             <h3>City: ${data.city.name}</h3>
             <li></li>
-            <li>${data.list[0].main.temp} degrees Fahrenheit</li>
-            <li>Minimum Temperature: ${data.list[0].main.temp_min} degrees Fahrenheit</li>
-            <li>Maximum Temperature: ${data.list[0].main.temp_max} degrees Fahrenheit</li>
-            <li>Temperature Feels Like: ${data.list[0].main.feels_like} degrees Fahrenheit</li>
-            <li>Description: ${data.list[0].weather[0].description} </li>
-            <li>Wind: ${data.list[0].wind.speed} miles per hour </li>
             <li>Sunrise: ${new Date(data.city.sunrise*1000).toLocaleString()}</li>  
             <li>Sunset: ${new Date(data.city.sunset*1000).toLocaleString()}</li>
             </ul>
-            `
+        `;
+        // let forecastList = document.getElementById('forecastOutput').innerHTML;
+            for (let i = 0; i < 5; i++) {
+                outputDiv.innerHTML += `
+            <div class='forecast'>
+            <ul>
+            <li><b>${new Date(data.list[i].dt*1000).toLocaleString()}</b></li>
+            <li>${data.list[i].main.temp}°F</li>
+            <li>Min Temp: ${data.list[i].main.temp_min}°F</li>
+            <li>Max Temp: ${data.list[i].main.temp_max}°F</li>
+            <li>Feels Like: ${data.list[i].main.feels_like}°F</li>
+            <li>Description: ${data.list[i].weather[0].description} </li>
+            <li>Wind: ${data.list[i].wind.speed}mph </li>
+            </ul>
+            <hr>
+            </div>
+            `;
+            }
         })
-        // document.getElementById('output').innerHTML = output;})
         .catch(error => console.log('There was an error:', error))
 }, false);
 
+
 // when the data was pulled
 let dateTime = new Date();
-document.getElementById('dateTime').innerHTML = "At Last Sync: " + (dateTime.getMonth() + 1) + "/" +
+document.getElementById('dateTime').innerHTML =
+    "At Last Update: " + (dateTime.getMonth() + 1) + "/" +
     dateTime.getDate() + "/" +
-    dateTime.getFullYear() + " @ " +
-    dateTime.getHours() + ":" +
-    dateTime.getMinutes() + ":" +
-    dateTime.getSeconds();
+    dateTime.getFullYear() + " at " +
+    dateTime.toLocaleTimeString();
+
+
+// checks zip code for numeric and undefined values then gives feedback
+zipInput.addEventListener('input', () => {
+    const regex = (/\d{5}/g);
+    let zip = document.getElementById('zipCode').value;
+    if (zip != 'undefined' && regex.test(zip)) {
+        console.log('passed');
+        document.getElementById('zipCheck').innerHTML =
+            `<p style="color:green";><i>Zip Code Received</i></p>`;
+    } else {
+        console.log('failed');
+        document.getElementById('zipCheck').innerHTML =
+            `<p style="color:red";><i>Zip Code Invalid - must be 5 numbers</i></p>`;
+    }
+})
+
+
+// catchImage()
+// .then(response => {
+//     console.log('show image');
+// })
+// .catch(error => {
+//     console.log('image error!');
+//     console.error(error);
+// });
+
+// async function catchImage() {
+//     const response = await fetch('https://openweathermap.org/img/wn/10d@2x.png');
+//     const blob = await response.blob();
+//     document.getElementById('image').src = URL.createObjectURL(blob);
+// }
