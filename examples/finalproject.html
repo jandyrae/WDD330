@@ -21,24 +21,25 @@
     <div id="container">
         <h2 id="dateTime"></h2>
         <div>
-            <hr>
-            
-                <input type="text" id="zipCode" placeholder="93536" maxlength="5">
-                <div id="zipCheck"></div>
-                <div id='forecastOutput'></div>
-                <div id='output'>
-                <p>Response will load here</p>
-                <img src="" alt="image of weather" id="icon">
-                </div>
-                <button class="button" id="weather">Weather</button>
-                <button class="button" id="air">Air Quality</button>
-                <button class="button" id="forecast">Forecast</button>
-                <button class="button" id="uv">UV Index</button>
+            <hr>               
+            <div><img src='' alt="image of weather" id="tempIcon"></div>
            
+            <input type="text" id="zipCode" placeholder="93536" maxlength="5">
+            <div id="zipCheck"></div>
+            <div id='forecastOutput'></div>
+            <div id='output'>
+                <p>Response will load here</p>
+ 
+            </div>
+            <button class="button" id="weather">Weather</button>
+            <button class="button" id="air">Air Quality</button>
+            <button class="button" id="forecast">Forecast</button>
+            <button class="button" id="uv">UV Index</button>
+
         </div>
-        <img src="" alt="weatherImage" hidden>
+        <!-- <img src="" alt="weatherImage" hidden> -->
     </div> <!-- end container -->
-    <div class="weatherAlert">
+    <div id="weatherAlert">
 
     </div>
     <footer>
@@ -46,6 +47,7 @@
         <h5 id="footer">Jandy Kiger - 2021 BYU Idaho - All Rights Reserved ©</h5>
     </footer>
     <script src="finalproject.js" type="module" defer></script>
+
 </body>
 
 </html>

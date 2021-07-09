@@ -51,7 +51,7 @@ const outputDiv = document.getElementById('output');
 const apiForecast = document.getElementById('forecast');
 const UVindex = document.getElementById('uv');
 const forecastOutput = document.getElementById('forecastOutput');
-
+const alertOutput = document.getElementById('weatherAlert');
 let zipInput = document.getElementById('zipCode');
 
 
@@ -72,6 +72,7 @@ UVindex.addEventListener('click', () => {
         .then(response => response.json())
         .then((data) => {
             console.log(data);
+            // alertOutput.innerHTML = `<h2>${data.alerts[0].description}</h2>`;
             let output = '<h2 class="mb-4">Sun Conditions: </h2>';
             outputDiv.innerHTML = output +=
                 `<ul>
@@ -79,9 +80,8 @@ UVindex.addEventListener('click', () => {
             <li>UV Index <b>${data.current.uvi} </b></li>
             <li>Cloud Covering <b>${data.current.clouds}% of sky</b></li>
             <li> <b>${data.current.weather[0].description} </b></li>
-            <div id='icon'>${data.current.weather[0].icon}</div>
             `;
-            icon = data.current.weather[0].icon;
+            
         
         return fetch(`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`)}) 
         .then(response => {
@@ -93,7 +93,7 @@ UVindex.addEventListener('click', () => {
         })
     
         .then(response => response.blob())
-        .then((img) => document.getElementById('icon').src = URL.createObjectURL(img))
+        .then((img) => document.getElementById('tempIcon').src = URL.createObjectURL(img))
         .catch(error => console.log('There was an error:', error));
 })
 
@@ -188,7 +188,7 @@ apiForecast.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
     fetch(forecastURL + zip + forecastAPI)
         .then(response => {
-            // outputDiv.innerHTML = 'Waiting for response...';
+            outputDiv.innerHTML = 'Waiting for response...';
             if (response.ok) {
                 return response;
             }
