@@ -7,11 +7,12 @@ import {
 let latitude, longitude, zip, icon;
 
 
-getLocation('output'); // run the function that gives us values for lat and lon to be used here
-console.log(lat, lon); // TODO shows undefined, fix
+// getLocation('output'); // run the function that gives us values for lat and lon to be used here
+// console.log(lat, lon); // TODO shows undefined, fix scope ?
 
-const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
-const weatherAPI = ',us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d';
+const weatherURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
+const weatherAPI = `,us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d`;
+
 // My API key is cec6688f1b2e49611b637187174f926d
 // - API documentation https://openweathermap.org/api
 // {
@@ -44,17 +45,53 @@ const oneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}
 // const oneCallAPI = `&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`;
 const oneCallURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.601&lon=-118.231&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d';
 
-// DOM
+// DOM - buttons
 const apiWeather = document.getElementById('weather');
 const apiAirQuality = document.getElementById('air');
-const outputDiv = document.getElementById('output');
 const apiForecast = document.getElementById('forecast');
 const UVindex = document.getElementById('uv');
-const forecastOutput = document.getElementById('forecastOutput');
+// DOM - output
+const outputDiv = document.getElementById('output');
+// const forecastOutput = document.getElementById('forecastOutput');
+// const airOutput = document.getElementById('aqiOutput');
 const alertOutput = document.getElementById('weatherAlert');
+
 let zipInput = document.getElementById('zipCode');
 
-
+window.addEventListener('load', () =>{
+    getLocation('output');
+    zip = parseInt(document.getElementById('zipCode').value);
+    zipInput.focus();
+    fetch(weatherURL + zip + weatherAPI)
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        throw Error(response.statusText)
+    })
+    .then(response => response.json())
+    .then((data) => {
+        latitude = data.coord.lat;
+        longitude = data.coord.lon;
+        console.log(data);
+        let dayNight = data.weather[0].icon;
+        dayNight.slice(-1);
+        if (dayNight.slice(-1) == 'n') {
+            document.getElementById('tempIcon').style.backgroundColor = "darkgray";
+        }
+        outputDiv.innerHTML = `<div id='initialLoad'>${data.main.temp}°F</div>`
+        return fetch(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)}) 
+        .then(response => {
+            
+            if (response.ok) {
+                return response;
+            }
+            throw Error(response.statusText);
+        })
+        .then(response => response.blob())
+        .then((img) => document.getElementById('tempIcon').src = URL.createObjectURL(img))
+        .catch(error => console.log('There was an error:', error))
+})
 
 
 // for uv info from the onecall url
@@ -72,7 +109,7 @@ UVindex.addEventListener('click', () => {
         .then(response => response.json())
         .then((data) => {
             console.log(data);
-            // alertOutput.innerHTML = `<h2>${data.alerts[0].description}</h2>`;
+            alertOutput.innerHTML = `<h2>${data.alerts[0].description}</h2>`;
             let output = '<h2 class="mb-4">Sun Conditions: </h2>';
             outputDiv.innerHTML = output +=
                 `<ul>
@@ -81,19 +118,7 @@ UVindex.addEventListener('click', () => {
             <li>Cloud Covering <b>${data.current.clouds}% of sky</b></li>
             <li> <b>${data.current.weather[0].description} </b></li>
             `;
-            
-        
-        return fetch(`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`)}) 
-        .then(response => {
-            // outputDiv.innerHTML = 'Waiting for response...';
-            if (response.ok) {
-                return response;
-            }
-            throw Error(response.statusText);
         })
-    
-        .then(response => response.blob())
-        .then((img) => document.getElementById('tempIcon').src = URL.createObjectURL(img))
         .catch(error => console.log('There was an error:', error));
 })
 
@@ -115,13 +140,14 @@ apiWeather.addEventListener('click', () => {
             longitude = data.coord.lon;
             let output = '<h2 class="mb-4">Weather</h2>';
             outputDiv.innerHTML = output +=
-                `<h3>Getting weather conditions for: </h3>
+                `<h3>Weather conditions: </h3>
             <ul>
             <li> <b>${ data.name} </b></li>
             <li>Weather Description: <b>${ data.weather[0].description} </b></li>
             <li><b>${ data.main.temp }°F and feels like  ${ data.main.feels_like}°F </b></li>
             <li>Barometric pressure of <b>${ data.main.pressure} with humidity at  ${ data.main.humidity }% </b></li>
-            <li>Current visibility <b>${ data.visibility}  and wind speed  ${ data.wind.speed} MPH</b></li>
+            <li>Current visibility <b>${ data.visibility}</b></li>
+            <li>Wind speed <b> ${ data.wind.speed} MPH</b></li>
             `
             return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`)
                 .then(response => response.json())
@@ -137,7 +163,7 @@ apiAirQuality.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
     fetch(weatherURL + zip + weatherAPI)
         .then(response => {
-            outputDiv.innerHTML = 'Waiting for response...';
+            outputDiv.innerHTML = '';
             if (response.ok) {
                 return response;
             }
@@ -150,7 +176,7 @@ apiAirQuality.addEventListener('click', () => {
             return fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=cec6688f1b2e49611b637187174f926d`)
                 .then(console.log(pollutionAPI))
                 .then(response => {
-                    outputDiv.innerHTML = 'Waiting for response...';
+                    // outputDiv.innerHTML = '';
                     if (response.ok) {
                         return response;
                     }
@@ -188,7 +214,7 @@ apiForecast.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
     fetch(forecastURL + zip + forecastAPI)
         .then(response => {
-            outputDiv.innerHTML = 'Waiting for response...';
+            document.innerHTML = '';
             if (response.ok) {
                 return response;
             }
@@ -199,12 +225,13 @@ apiForecast.addEventListener('click', () => {
         .then((data) => { //need to do a for each or something here or  for i in...
             console.log(data);
             let output = '<h2 class="mb-4">Forecast</h2>';
-            forecastOutput.innerHTML = output += `
+            outputDiv.innerHTML = output += `
             <ul>
             <h3>City: ${data.city.name}</h3>
             <li></li>
             <li>Sunrise: ${new Date(data.city.sunrise*1000).toLocaleString()}</li>  
             <li>Sunset: ${new Date(data.city.sunset*1000).toLocaleString()}</li>
+            <br>
             </ul>
         `;
         // let forecastList = document.getElementById('forecastOutput').innerHTML;

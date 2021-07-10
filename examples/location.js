@@ -14,7 +14,7 @@ export function getLocation() {
 function showPosition(position) {
     lat = Number(position.coords.latitude).toFixed(3);
     lon = Number(position.coords.longitude).toFixed(3);
-    console.log(lat, lon);
+    // console.log(lat, lon);
     note.innerHTML = `<p>The coordinates of ${lat} and ${lon} are received from the browser</p>`;
    
 }
