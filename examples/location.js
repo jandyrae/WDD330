@@ -43,7 +43,6 @@ export function inputCheck() {
     } else {
         console.log('failed');
         document.getElementById('zipCode').autofocus;
-        document.getElementById('zipCode') = 
         document.getElementById('zipCheck').innerHTML =
             `<p style="color:red";><i>Zip Code Invalid - must be 5 numbers</i></p>`;
     }
