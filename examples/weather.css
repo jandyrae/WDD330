@@ -37,15 +37,22 @@ a {
     margin: auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: larger;
-    padding-bottom: 25px;
+    padding-bottom: 30px;
+    line-height: 30px;
 }
 
-/* Selects any valid <input> */
+/* checks any valid <input> */
 input:valid {
-    background-color: rgba(0, 128, 0, 0.274);
+    background-color: rgba(0, 128, 0, 0.13);
     padding: 14px 35px;
     border-radius: 8px;
 }
+input:invalid {
+    padding: 14px 35px;
+    border-radius: 8px;
+    border: 2px solid red;
+    box-shadow: 0 2px 5px 0 red, 0 2px 5px 0 red;
+  }
 
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/:valid */
 
@@ -67,18 +74,21 @@ input:valid {
 .button:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid rgb(34, 66, 124);
+    font-size: larger;
 }
 
-ul{
+ul {
     padding: 0;
     margin: 0;
 }
 
 li {
     list-style: none;
-    text-align: left;
+    text-align: center;
 }
-
+ul#internalList{
+    align-items: left;
+}
 footer {
     text-align: center;
     color: cornsilk;
@@ -110,7 +120,7 @@ div {
     height: fit-content;
     margin: auto;
     border-radius: 10px;
-    
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 #initialLoad {
@@ -120,9 +130,10 @@ div {
     align-items: center;
     padding: 70px;
     text-align: center;
-    background-color: ivory;
-    border: 1px solid blue;
+    background-color: white;
+    border: 1px solid rgb(34, 66, 124);
     border-radius: 10px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 
 }

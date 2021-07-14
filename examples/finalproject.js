@@ -1,104 +1,94 @@
 import {
+    dtUpdate,
     getLocation,
-    lat,
-    lon
+    inputCheck,
+    windDirection
 } from './location.js';
 
-let latitude, longitude, zip, icon;
+let latitude, longitude, zip;
 
 
-// getLocation('output'); // run the function that gives us values for lat and lon to be used here
-// console.log(lat, lon); // TODO shows undefined, fix scope ?
-
+// URLs for api calls
 const weatherURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
 const weatherAPI = `,us&units=imperial&APPID=cec6688f1b2e49611b637187174f926d`;
 
-// My API key is cec6688f1b2e49611b637187174f926d
-// - API documentation https://openweathermap.org/api
-// {
-// "coord":{"lon":-0.1257,"lat":51.5085},
-// "weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],
-// "base":"stations",
-// "main":{"temp":290.27,"feels_like":290.28,"temp_min":288.07,"temp_max":291.13,"pressure":1016,"humidity":86},
-// "visibility":10000,
-// "wind":{"speed":2.02,"deg":237,"gust":5.62},
-// "clouds":{"all":22},
-// "dt":1622688920,
-// "sys":{"type":2,"id":2019646,"country":"GB","sunrise":1622692055,"sunset":1622751006},
-// "timezone":3600,"id":2643743,"name":"London","cod":200
-// }
-
-const pollutionAPI = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=cec6688f1b2e49611b637187174f926d`;
-// example of pollution api lat=34.601&lon=-118.231
-// ( Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.)
-// {
-//     "coord":{"lon":-118.231,"lat":34.6017},
-//     "list":[{"main":{"aqi":3},"components":{"co":178.58,"no":0.02,"no2":1.39,"o3":123.02,"so2":1.36,"pm2_5":6.86,"pm10":9.36,"nh3":0.17},
-//     "dt":1622948400}]
-// }
 const forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?zip=';
 const forecastAPI = ',us&units=imperial&cnt=5&appid=cec6688f1b2e49611b637187174f926d';
-// 
-
-const oneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`;
-
-// const oneCallAPI = `&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`;
-const oneCallURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.601&lon=-118.231&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d';
+// other api's called in fetch because they required the gps coordinates returned by the zip entry
 
 // DOM - buttons
 const apiWeather = document.getElementById('weather');
 const apiAirQuality = document.getElementById('air');
 const apiForecast = document.getElementById('forecast');
 const UVindex = document.getElementById('uv');
+
 // DOM - output
 const outputDiv = document.getElementById('output');
-// const forecastOutput = document.getElementById('forecastOutput');
-// const airOutput = document.getElementById('aqiOutput');
 const alertOutput = document.getElementById('weatherAlert');
 
+// DOM - input
 let zipInput = document.getElementById('zipCode');
+document.getElementById('icon').style.display = 'none';
 
-window.addEventListener('load', () =>{
+// (onchange event)information loaded with weather icon and current temp when zip changes
+window.addEventListener('change', () => {
     getLocation('output');
+    dtUpdate();
     zip = parseInt(document.getElementById('zipCode').value);
     zipInput.focus();
+    document.getElementById
     fetch(weatherURL + zip + weatherAPI)
-    .then(response => {
-        if (response.ok) {
-            return response;
-        }
-        throw Error(response.statusText)
-    })
-    .then(response => response.json())
-    .then((data) => {
-        latitude = data.coord.lat;
-        longitude = data.coord.lon;
-        console.log(data);
-        let dayNight = data.weather[0].icon;
-        dayNight.slice(-1);
-        if (dayNight.slice(-1) == 'n') {
-            document.getElementById('tempIcon').style.backgroundColor = "darkgray";
-        }
-        outputDiv.innerHTML = `<div id='initialLoad'>${data.main.temp}°F</div>`
-        return fetch(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)}) 
         .then(response => {
-            
             if (response.ok) {
+                return response;
+            }
+            throw Error(response.statusText)
+        })
+        .then(response => response.json())
+        .then((data) => {
+            latitude = data.coord.lat;
+            longitude = data.coord.lon;
+            // console.log(data);
+            document.getElementById('tempIcon').setAttribute('alt', data.weather[0].description);
+            let dayNight = data.weather[0].icon;
+            dayNight.slice(-1);
+            if (dayNight.slice(-1) == 'n') {
+                document.getElementById('icon').style.backgroundColor = "darkgray";
+            }
+            outputDiv.innerHTML = `<div id='initialLoad'>${data.main.temp}°F</div>`
+            return fetch(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('icon').style.display = 'block';
                 return response;
             }
             throw Error(response.statusText);
         })
         .then(response => response.blob())
-        .then((img) => document.getElementById('tempIcon').src = URL.createObjectURL(img))
+        .then((img) => {
+            document.getElementById('tempIcon').src = URL.createObjectURL(img);
+        })
         .catch(error => console.log('There was an error:', error))
-})
+}, false);
 
 
-// for uv info from the onecall url
+// (onclick event) for sun and uv info from the onecall url, but latitude and longitude needed first
 UVindex.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
-    // const onecall = oneCallURL + oneCallAPI;
-    fetch(oneCallURL) // onecall if i can get gps to load
+    fetch(weatherURL + zip + weatherAPI)
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            throw Error(response.statusText)
+        })
+        .then(response => response.json())
+        .then((data) => {
+            latitude = data.coord.lat;
+            longitude = data.coord.lon;
+            return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`)
+        }) 
         .then(response => {
             outputDiv.innerHTML = 'Waiting for response...';
             if (response.ok) {
@@ -108,22 +98,29 @@ UVindex.addEventListener('click', () => {
         })
         .then(response => response.json())
         .then((data) => {
-            console.log(data);
-            alertOutput.innerHTML = `<h2>${data.alerts[0].description}</h2>`;
+            // console.log(data);
+            if (data.alerts == undefined) {
+                alertOutput.innerHTML = `<h2>There are no current alerts for this area.</h2>`
+            } else {
+                alertOutput.innerHTML = `<h2>${data.alerts[0].description}</h2>`;
+            }
             let output = '<h2 class="mb-4">Sun Conditions: </h2>';
             outputDiv.innerHTML = output +=
                 `<ul>
             <li>Currently <b>${data.current.temp}°F</b></li>
             <li>UV Index <b>${data.current.uvi} </b></li>
+            <li style="color:red; text-align:left; padding-left:170px;">
+            <i>1 - 2 = Low <br> 3-5 = Moderate <br> 6-7 = High <br> 8-10 = Very High <br> 11+ = Extreme <br>
+            </i></li>
             <li>Cloud Covering <b>${data.current.clouds}% of sky</b></li>
             <li> <b>${data.current.weather[0].description} </b></li>
             `;
         })
         .catch(error => console.log('There was an error:', error));
-})
+}, false);
 
 
-// listener for weather call
+// (onclick event) listener for weather call
 apiWeather.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
     fetch(weatherURL + zip + weatherAPI)
@@ -140,25 +137,22 @@ apiWeather.addEventListener('click', () => {
             longitude = data.coord.lon;
             let output = '<h2 class="mb-4">Weather</h2>';
             outputDiv.innerHTML = output +=
-                `<h3>Weather conditions: </h3>
+                `<h3>Weather conditions for <b>${data.name}</b>: </h3>
             <ul>
-            <li> <b>${ data.name} </b></li>
-            <li>Weather Description: <b>${ data.weather[0].description} </b></li>
-            <li><b>${ data.main.temp }°F and feels like  ${ data.main.feels_like}°F </b></li>
-            <li>Barometric pressure of <b>${ data.main.pressure} with humidity at  ${ data.main.humidity }% </b></li>
+            <li>Weather Description <b>${ data.weather[0].description} </b></li>
+            <li>Currently <b>${data.main.temp }°F</b> and feels like <b> ${data.main.feels_like}°F </b></li>
+            <li>Barometric pressure of <b>${ data.main.pressure}</b></li>
+            <li>Humidity at <b> ${ data.main.humidity }% </b></li>
             <li>Current visibility <b>${ data.visibility}</b></li>
             <li>Wind speed <b> ${ data.wind.speed} MPH</b></li>
+            <li>Wind Direction<b> ${windDirection(data.wind.deg)}</b></li></ul>
             `
-            return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely&appid=cec6688f1b2e49611b637187174f926d`)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data);
-                })
         })
         .catch(error => console.log('There was an error:', error))
 }, false);
 
-// listener for air quality call
+
+// (onclick event) listener for air quality call
 apiAirQuality.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
     fetch(weatherURL + zip + weatherAPI)
@@ -173,10 +167,10 @@ apiAirQuality.addEventListener('click', () => {
         .then((data) => {
             latitude = data.coord.lat;
             longitude = data.coord.lon;
-            return fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=cec6688f1b2e49611b637187174f926d`)
+            const pollutionAPI = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=cec6688f1b2e49611b637187174f926d`;
+            return fetch(pollutionAPI)
                 .then(console.log(pollutionAPI))
                 .then(response => {
-                    // outputDiv.innerHTML = '';
                     if (response.ok) {
                         return response;
                     }
@@ -190,14 +184,10 @@ apiAirQuality.addEventListener('click', () => {
                 `<h3>Air Quality conditions</h3>
             <ul>
             <li>Air Quality Index: <b> ${data.list[0].main.aqi }</b></li>
-            <li style="color:blue";>
-            <ul><i>
-            <li>1 = Good</li>   
-            <li>2 = Fair</li>   
-            <li>3 = Moderate</li>   
-            <li>4 = Poor</li>  
-            <li>5 = Very Poor</li>
-            </i></ul>
+            <li style="color:blue; text-align:left; padding-left:170px;" >
+            <i>
+            1 = Good <br> 2 = Fair <br> 3 = Moderate <br> 4 = Poor <br> 5 = Very Poor <br>
+            </i></li>
             <li>Carbon Monoxide: ${ data.list[0].components.co }</li>
             <li>Nitrogen monoxide: ${ data.list[0].components.no }</li>
             <li>Nitrogen dioxide: ${ data.list[0].components.no2}</li>
@@ -209,7 +199,8 @@ apiAirQuality.addEventListener('click', () => {
         .catch(error => console.log('There was an error:', error))
 }, false);
 
-// listener for forecast call
+
+// (onclick event) listener for forecast call
 apiForecast.addEventListener('click', () => {
     zip = parseInt(document.getElementById('zipCode').value);
     fetch(forecastURL + zip + forecastAPI)
@@ -221,20 +212,19 @@ apiForecast.addEventListener('click', () => {
             throw Error(response.statusText);
         })
         .then(response => response.json())
-
-        .then((data) => { //need to do a for each or something here or  for i in...
-            console.log(data);
+        .then((data) => { 
+            // console.log(data);
             let output = '<h2 class="mb-4">Forecast</h2>';
             outputDiv.innerHTML = output += `
             <ul>
             <h3>City: ${data.city.name}</h3>
-            <li></li>
+            <br>
             <li>Sunrise: ${new Date(data.city.sunrise*1000).toLocaleString()}</li>  
             <li>Sunset: ${new Date(data.city.sunset*1000).toLocaleString()}</li>
             <br>
             </ul>
         `;
-        // let forecastList = document.getElementById('forecastOutput').innerHTML;
+            // loop through the array 
             for (let i = 0; i < 5; i++) {
                 outputDiv.innerHTML += `
             <div class='forecast'>
@@ -256,42 +246,5 @@ apiForecast.addEventListener('click', () => {
 }, false);
 
 
-// when the data was pulled
-let dateTime = new Date();
-document.getElementById('dateTime').innerHTML =
-    "At Last Update: " + (dateTime.getMonth() + 1) + "/" +
-    dateTime.getDate() + "/" +
-    dateTime.getFullYear() + " at " +
-    dateTime.toLocaleTimeString();
-
-
-// checks zip code for numeric and undefined values then gives feedback
-zipInput.addEventListener('input', () => {
-    const regex = (/\d{5}/g);
-    let zip = document.getElementById('zipCode').value;
-    if (zip != 'undefined' && regex.test(zip)) {
-        console.log('passed');
-        document.getElementById('zipCheck').innerHTML =
-            `<p style="color:green";><i>Zip Code Received</i></p>`;
-    } else {
-        console.log('failed');
-        document.getElementById('zipCheck').innerHTML =
-            `<p style="color:red";><i>Zip Code Invalid - must be 5 numbers</i></p>`;
-    }
-})
-
-
-// catchImage()
-// .then(response => {
-//     console.log('show image');
-// })
-// .catch(error => {
-//     console.log('image error!');
-//     console.error(error);
-// });
-
-// async function catchImage() {
-//     const response = await fetch('https://openweathermap.org/img/wn/10d@2x.png');
-//     const blob = await response.blob();
-//     document.getElementById('image').src = URL.createObjectURL(blob);
-// }
+// (oninput event) checks zip code for numeric and undefined values then gives feedback
+zipInput.addEventListener('input', () => inputCheck());

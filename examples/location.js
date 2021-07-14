@@ -16,29 +16,42 @@ function showPosition(position) {
     lon = Number(position.coords.longitude).toFixed(3);
     // console.log(lat, lon);
     note.innerHTML = `<p>The coordinates of ${lat} and ${lon} are received from the browser</p>`;
-   
+
 }
 
 
+// when the data was pulled
+export function dtUpdate() {
+    let dateTime = new Date();
+    document.getElementById('dateTime').innerHTML =
+        "At Last Update: " + (dateTime.getMonth() + 1) + "/" +
+        dateTime.getDate() + "/" +
+        dateTime.getFullYear() + " at " +
+        dateTime.toLocaleTimeString();
+}
 
-// catchImage()
-// .then(response => {
-//         console.log('show image');
-// })
-// .catch(error => {
-//     console.log('error!');
-//     console.error(error);
-// });
+// validate zip code entry
+export function inputCheck() {
+    const regex = (/\d{5}/g);
+    document.getElementById('zipCode');
+    let zip = document.getElementById('zipCode').value;
+    if (zip != 'undefined' && regex.test(zip)) {
+        console.log('passed');
+        // document.getElementById('zipCode');
+        document.getElementById('zipCheck').innerHTML =
+            `<p style="color:green";><i>Zip Code Received</i></p>`;
+    } else {
+        console.log('failed');
+        document.getElementById('zipCode').autofocus;
+        document.getElementById('zipCode') = 
+        document.getElementById('zipCheck').innerHTML =
+            `<p style="color:red";><i>Zip Code Invalid - must be 5 numbers</i></p>`;
+    }
+}
 
-// async function catchImage() {
-//     const response = await fetch('https://openweathermap.org/img/wn/10d@2x.png');
-//     const blob = await response.blob();
-//     document.getElementById('image').src = URL.createObjectURL(blob);
-// }
-
-
-// https://openweathermap.org/img/w/${jsObject.weather[0].icon}.png
-// for (let i = 0; count < 5; i++) {
-//       let obj = jsObject.list[i];
-//       if (obj.dt_txt.includes("18:00:00")) {
-//         count++;
+// return direction based on degrees returned from api
+export function windDirection(degrees) {
+    const windArray = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    const windDir = windArray[Math.ceil(degrees / 22.5) % 16];
+    return windDir;
+}
