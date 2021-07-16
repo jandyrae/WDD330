@@ -19,7 +19,6 @@ function showPosition(position) {
 
 }
 
-
 // when the data was pulled
 export function dtUpdate() {
     let dateTime = new Date();
@@ -54,3 +53,4 @@ export function windDirection(degrees) {
     const windDir = windArray[Math.ceil(degrees / 22.5) % 16];
     return windDir;
 }
+
