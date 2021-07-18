@@ -1,10 +1,10 @@
 body {
-    background: linear-gradient(blue 0%, green 50%, blue 100%);
+    background: linear-gradient(blue 0%, black 50%, blue 100%);
 
 }
 
 h1 {
-    color: rgb(201, 202, 221);
+    color: dimgray;
     font-family: Arial, Helvetica, sans-serif;
     font-size: xx-large;
     text-align: center;
@@ -12,7 +12,7 @@ h1 {
 }
 
 a {
-    color: white;
+    color: lightgray;
     font-size: 12px;
     text-align: left;
 }
@@ -25,7 +25,7 @@ a {
     flex-direction: column;
     border: 1px dotted gray;
     border-radius: 10px;
-    background: linen;
+    background: darkslategray;
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     height: fit-content;
@@ -93,7 +93,7 @@ li {
 
 footer {
     text-align: center;
-    color: cornsilk;
+    color: lightgray;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 100;
 }
@@ -145,7 +145,7 @@ div {
     margin: auto;
     align-items: center;
     text-align: center;
-    background-color: white;
+    background-color: gray;
     border: 1px solid rgb(34, 66, 124);
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;

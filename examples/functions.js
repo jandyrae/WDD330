@@ -54,3 +54,6 @@ export function windDirection(degrees) {
     return windDir;
 }
 
+export function darkMode() {
+    document.getElementsByTagName("link").href = "darkWeather.css";
+}
