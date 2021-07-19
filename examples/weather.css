@@ -1,14 +1,13 @@
 body {
-    background: linear-gradient(blue 0%, green 50%, blue 100%);
+    background: linear-gradient(rgb(89, 89, 252) 0%, rgb(2, 185, 2) 50%, rgb(89, 89, 255) 100%);
 
 }
 
 h1 {
     color: rgb(201, 202, 221);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: xx-large;
     text-align: center;
-
+    font-size: xx-large;
 }
 
 a {
@@ -17,9 +16,12 @@ a {
     text-align: left;
 }
 
-#container {
+hr {
+    overflow: hidden;
+}
+.container {
     width: 65%;
-    height: 500px;
+    height: auto;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -28,7 +30,12 @@ a {
     background: linen;
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: fit-content;
+    height: auto;
+}
+
+#loadInfo {
+    height: auto;
+    width: auto;
 }
 
 #output {
@@ -36,7 +43,7 @@ a {
     flex-direction: column;
     justify-content: center;
     width: 90%;
-    height: fit-content;
+    height: auto;
     margin: auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: larger;
@@ -112,7 +119,7 @@ i {
     flex-direction: row;
     margin: auto;
     height: auto;
-    width: 13%;
+    width: 15%;
     overflow-x: scroll;
     padding: 0 25px;
 }
@@ -165,4 +172,55 @@ div {
     font-style: italic;
     font-size: small;
 }
+#dark {
+  float: right;
+}
 
+/* Dark mode settings */
+body.dark-theme {
+    background: linear-gradient(rgb(0, 0, 110) 0%, rgb(0, 0, 0) 50%, rgb(0, 0, 110) 100%);
+}
+
+body.dark-theme h1{
+    color: lightgray;
+    
+}
+
+body.dark-theme a{
+    color: lightgray;
+}
+
+body.dark-theme .container{
+    border: 1px dotted gray;
+    background-color: rgb(66, 66, 66);
+    color: rgb(194, 194, 194);
+}
+
+body.dark-theme input:valid{
+    background-color: rgb(139, 163, 139);
+}
+
+body.dark-theme .button {
+    background-color: #2a5f2c;
+    color: rgb(12, 12, 12);
+}
+
+body.dark-theme #initialLoad{
+    background-color: gray;
+    border: 1px solid black;
+    color: black;
+}
+
+body.dark-theme footer {
+    color: rgb(139, 163, 139);
+}
+
+body.dark-theme #weatherAlert {
+    color:rgba(172, 255, 47, 0.514);
+}
+ 
+body.dark-theme div.explain {
+    background-color: darkgrey;
+    padding: 8px;
+    border-radius: 5px;
+}
