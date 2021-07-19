@@ -56,9 +56,4 @@ export function windDirection(degrees) {
 
 export function darkMode() {
     document.body.classList.toggle('dark-theme');
-    // if (document.body.classList = ('dark-theme')){
-    //     document.getElementById('dark').value ='Light';
-    // } else if (!document.body.classList == ('dark-theme')) {
-    //     document.getElementById('dark').value ='Dark';
-    // }
 }

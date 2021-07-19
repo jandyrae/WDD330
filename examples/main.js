@@ -63,8 +63,10 @@ apiForecast.addEventListener('click', () => {
 zipInput.addEventListener('input', () => {
     inputCheck()
 }, false);
-
-dark.addEventListener('click', () => {darkMode()}, false);
+// (onclick event) when the dark element is clicked the function will toggle the body class
+dark.addEventListener('click', () => {
+    darkMode()
+}, false);
 
 // functions for listeners that handle fetch and display for each button press
 function inputChange() {
@@ -193,7 +195,7 @@ function airQuality() {
 function forecast() {
     zip = parseInt(document.getElementById('zipCode').value);
     forecastOutput.innerHTML = '';
-    forecastOutput.style.display = 'flex';    
+    forecastOutput.style.display = 'flex';
     fetch(forecastURL + zip + forecastAPI)
         .then(response => {
             outputDiv.innerHTML = 'Waiting for response...verify valid zip code entered';
