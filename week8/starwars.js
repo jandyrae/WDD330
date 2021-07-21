@@ -93,7 +93,7 @@ apiShips.addEventListener('click', () => {
     .then( response => response.json() )
     .then (data => {
         console.log(data);
-        document.querySelector('button').setAttribute('href', data.next );
+        document.querySelector("button.next").setAttribute('href', data.next);
         for(let i = 0; i < 10; i++) {
         outputDiv.innerHTML += 
         `<h1>Ship Name: ${data.results[i].name}</h1>
@@ -106,6 +106,5 @@ apiShips.addEventListener('click', () => {
         `
     }
     })
-    
     .catch( error => console.log('There was an error:', error))
 },false);
