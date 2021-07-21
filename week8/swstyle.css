@@ -1,0 +1,22 @@
+body {
+    background-color: gray;
+    font-family: monospace;
+    font-size: larger;
+}
+
+button {
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 10px 12px 0 black;
+}
+
+#buttons {
+    padding: 100px;
+}
+
+#output {
+    padding: 25px 0;
+    background-color: lightgray;
+    box-shadow: 0 10px 10px 0 black;
+    border-radius: 5px;
+}

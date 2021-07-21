@@ -13,7 +13,7 @@ const apiShips = document.getElementById('ships');
 // "species": "https://swapi.dev/api/species/",
 const shipAPI = "https://swapi.dev/api/starships/";
 // "vehicles": "https://swapi.dev/api/vehicles/"
-const planetAPI = 'https://swapi.dev/api/planets/5/';
+const planetAPI = 'https://swapi.dev/api/planets/';
 const filmsAPI = 'https://swapi.dev/api/films/';
 const peopleAPI = 'https://swapi.dev/api/people/';
 
@@ -25,12 +25,25 @@ apiPlanets.addEventListener('click', () => {
     .then( response => {
         outputDiv.innerHTML = 'Waiting for response...';
     if(response.ok) {
+        outputDiv.innerHTML = '';
         return response;
     }
     throw Error(response.statusText);
     })
     .then( response => response.json() )
-    .then( data => outputDiv.innerText = 'Planet Name: ' + data.name + ' Climate type: ' + data.climate + ' Planet diameter: ' +  data.diameter + ' Gravity Type:  ' + data.gravity )
+    .then( data => {
+        console.log(data);
+        for(let i = 0; i < 10; i++) {
+        outputDiv.innerHTML += 
+            `<h2>Planet: ${data.results[i].name}</h2>
+            <p>Rotation length: ${data.results[i].rotation_period}</p>
+            <p>Rotation length: ${data.results[i].orbital_period}</p>
+            <p>Climate: ${data.results[i].climate}</p>
+            <p>Diameter of planet: ${data.results[i].diameter}</p>
+            <p>Level of gravity: ${data.results[i].gravity}</p><br>
+            `
+        }
+    })
     .catch( error => console.log('There was an error:', error))
 },false);
 
@@ -40,13 +53,30 @@ apiPeople.addEventListener('click', () => {
     .then( response => {
         outputDiv.innerHTML = 'Waiting for response...';
     if(response.ok) {
+        outputDiv.innerHTML = '';
         return response;
     }
     throw Error(response.statusText);
     })
     .then( response => response.json() )
-    .then (data => outputDiv.innerHTML = document.querySelector('a').setAttribute('href', data.next )) // shows the next page 
-    // .then( data => outputDiv.innerText = 'Person\'s Name: ' + data.name + ' Hair color: ' + data.hair_color + ' Eye Color: ' +  data.eye_color + ' Gender:  ' + data.gender )
+    .then (data => {
+        console.log(data);
+        for(let i = 0; i < 10; i++) {
+            outputDiv.innerHTML += 
+            `<h2>Name: ${data.results[i].name}</h2>
+            <p>Hair Color: ${data.results[i].hair_color}</p>
+            <p>Eye Color: ${data.results[i].eye_color}</p>
+            <p>Gender: ${data.results[i].gender}</p>
+            <p>Skin Color: ${data.results[i].skin_color}</p>
+            <p>Mass: ${data.results[i].mass}</p><br>
+            `
+        }
+    })
+        //shows the next page
+        //outputDiv.innerHTML = `${document.querySelector('a').setAttribute('href', data.next )}`}) 
+//      .then( data => {   
+ 
+// })
     .catch( error => console.log('There was an error:', error))
 },false);
 
@@ -55,12 +85,26 @@ apiShips.addEventListener('click', () => {
     .then( response => {
         outputDiv.innerHTML = 'Waiting for response...';
     if(response.ok) {
+        outputDiv.innerHTML = '';
         return response;
     }
     throw Error(response.statusText);
     })
     .then( response => response.json() )
-    .then (data => outputDiv.innerHTML = 'Ships Information here ' + data.results.name)
-    // .then( data => outputDiv.innerText = 'Person\'s Name: ' + data.name + ' Hair color: ' + data.hair_color + ' Eye Color: ' +  data.eye_color + ' Gender:  ' + data.gender )
+    .then (data => {
+        console.log(data);
+        for(let i = 0; i < 10; i++) {
+        outputDiv.innerHTML += 
+        `<h1>Ship Name: ${data.results[i].name}</h1>
+        <p>Model: ${data.results[i].model}</p>
+        <p>Manufacturer: ${data.results[i].manufacturer}</p>
+        <p>Crew size: ${data.results[i].crew}</p>
+        <p>Length of vessel: ${data.results[i].length}</p>
+        <p>Passengers: ${data.results[i].passengers}</p>
+        <p>Max atmosphering Speed: ${data.results[i].max_atmosphering_speed}</p>
+        `
+    }
+    })
+    
     .catch( error => console.log('There was an error:', error))
 },false);
