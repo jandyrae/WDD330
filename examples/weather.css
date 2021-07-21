@@ -31,7 +31,7 @@ a {
 
 #loadInfo {
     height: auto;
-    width: auto;
+    width: 65%;
 }
 
 #output {
@@ -110,8 +110,8 @@ i {
 }
 
 .forecast {
-    padding: 0 25px;
-    width: 500px;
+    padding: 10px 25px;
+    width: 150px;
 }
 
 #forecastOutput {
@@ -119,7 +119,7 @@ i {
     flex-direction: row;
     margin: auto;
     height: auto;
-    width: 15%;
+    width: 55%;
     overflow-x: scroll;
     padding: 0 25px;
 }
