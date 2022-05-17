@@ -123,7 +123,7 @@ function restartGame() {
   currentPlayer = "X";
   gameStart = ["", "", "", "", "", "", "", "", ""];
   document.querySelectorAll('.square').forEach(square => square.style.color = "black");
-  document.querySelector("#winner").innerHTML = ""
+  document.querySelector("#winner").innerHTML = "";
   statusDisplay.innerHTML = currentPlayersTurn();
   document.querySelectorAll('.square').forEach(square => square.innerHTML = "");
 }
