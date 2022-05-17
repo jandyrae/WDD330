@@ -16,7 +16,8 @@ statusDisplay.innerHTML = currentPlayersTurn();
 
 function playerTurn(event) {
   if (!event.target.innerHTML.length) {
-    event.target.innerHTML = currentPlayer; // forces turn taking 
+    event.target.innerHTML = currentPlayer; 
+    // forces turn taking 
     if (currentPlayer === player1) {
       currentPlayer = player2;
     } else {
@@ -68,7 +69,8 @@ const winnerIf = [
 function checkWinner() {
   let i = 0;
   handlePlayerChange();
-  gameWon = false; // loop through the winnerIf arrays 
+  gameWon = false; 
+  // loop through the winnerIf arrays 
   while (i <= 7) {
     let winner = winnerIf[i];
     let a = gameStart[winner[0]];
@@ -93,6 +95,7 @@ function checkWinner() {
       winningPlayer = "O";
     }
     statusDisplay.innerHTML = `Player ${winningPlayer} has won!`;
+    markWinner(winningArray);
     gameRunning = false;
   }
   // handles if no one wins but there are no empty spaces a "draw" 
@@ -102,6 +105,13 @@ function checkWinner() {
     gameRunning = false;
     return;
   }
+}
+
+function markWinner(winningArray) {
+  for (let x = 0; x < winningArray.length; x++){
+  let idWin = document.querySelector(`data-square=${winningArray[x]}`)
+  idWin.classlist.toggle("win");
+  } 
 }
 document.querySelectorAll('.square').forEach(square => square.addEventListener('click', handleSquareClick));
 // restart the game set player and clear the array

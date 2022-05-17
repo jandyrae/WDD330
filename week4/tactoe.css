@@ -16,6 +16,10 @@
     margin: 30px;
 }
 
+.win {
+    color: green;
+}
+
 .daBoard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
