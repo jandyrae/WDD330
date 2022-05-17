@@ -4,7 +4,7 @@ let currentPlayer = "X";
 const player1 = "X"
 const player2 = "O"
 let gameStart = ["", "", "", "", "", "", "", "", ""];
-let winner;
+let winningArray;
 
 // set status to display on page
 const statusDisplay = document.querySelector('.gameInfo');
@@ -77,7 +77,8 @@ function checkWinner() {
     console.log(a, b, c); 
     console.log(gameStart, gameWon); 
     if (a != '' && b != '' && c != '' && a == b && a == c) {
-      console.log(currentPlayer); 
+      winningArray = winner;
+      console.log(winner); 
       gameWon = true;
       console.log(gameStart, gameWon); 
       break;
@@ -85,13 +86,13 @@ function checkWinner() {
     i++;
   }
   if (gameWon) {
-    winner = currentPlayer;
-    if (winner === "O") {
-      winner = "X";
+    winningPlayer = currentPlayer;
+    if (winningPlayer === "O") {
+      winningPlayer = "X";
     } else {
-      winner = "O";
+      winningPlayer = "O";
     }
-    statusDisplay.innerHTML = `Player ${winner} has won!`;
+    statusDisplay.innerHTML = `Player ${winningPlayer} has won!`;
     gameRunning = false;
   } 
   // handles if no one wins but there are no empty spaces a "draw" 
