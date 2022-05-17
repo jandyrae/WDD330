@@ -16,7 +16,7 @@ statusDisplay.innerHTML = currentPlayersTurn();
 
 function playerTurn(event) {
   if (!event.target.innerHTML.length) {
-    event.target.innerHTML = currentPlayer; 
+    event.target.innerHTML = currentPlayer;
     // forces turn taking 
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -69,7 +69,7 @@ const winnerIf = [
 function checkWinner() {
   let i = 0;
   handlePlayerChange();
-  gameWon = false; 
+  gameWon = false;
   // loop through the winnerIf arrays 
   while (i <= 7) {
     let winner = winnerIf[i];
@@ -108,10 +108,10 @@ function checkWinner() {
 }
 
 function markWinner(winningArray) {
-  for (let x = 0; x < winningArray.length; x++){
-  let idWin = document.querySelector(`data-square=${winningArray[x]}`)
-  idWin.classlist.toggle("win");
-  } 
+  for (let x = 0; x < winningArray.length; x++) {
+    let idWin = document.querySelector(`data-square=${winningArray[x]}`)
+    idWin.classlist.toggle("win");
+  }
 }
 document.querySelectorAll('.square').forEach(square => square.addEventListener('click', handleSquareClick));
 // restart the game set player and clear the array
