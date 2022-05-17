@@ -16,7 +16,7 @@
     margin: 30px;
 }
 
-.square.win {
+#winner {
     color: green;
 }
 

@@ -5,6 +5,7 @@ const player1 = "X";
 const player2 = "O";
 let gameStart = ["", "", "", "", "", "", "", "", ""];
 let winningArray;
+let winClass;
 
 // set status to display on page
 const statusDisplay = document.querySelector('.gameInfo');
@@ -95,6 +96,7 @@ function checkWinner() {
       winningPlayer = "O";
     }
     document.querySelector("#winner").innerHTML = `Player ${winningPlayer} has won!`;
+    statusDisplay.innerHTML = "";
     markWinner(winningArray);
     gameRunning = false;
   }
@@ -109,8 +111,9 @@ function checkWinner() {
 
 function markWinner(winningArray) {
   for (let x = 0; x < winningArray.length; x++) {
-    let idWin = document.querySelector(`data-square=${winningArray[x]}`)
-    idWin.classlist.toggle("win");
+    winClass = document.getElementById(`square${winningArray[x]+1}`);
+    console.log(winClass)
+    winClass.style.color = "green";
   }
 }
 document.querySelectorAll('.square').forEach(square => square.addEventListener('click', handleSquareClick));
@@ -119,6 +122,8 @@ function restartGame() {
   gameRunning = true;
   currentPlayer = "X";
   gameStart = ["", "", "", "", "", "", "", "", ""];
+  document.querySelectorAll('.square').forEach(square => square.style.color = "black");
+  document.querySelector("#winner").innerHTML = ""
   statusDisplay.innerHTML = currentPlayersTurn();
   document.querySelectorAll('.square').forEach(square => square.innerHTML = "");
 }
