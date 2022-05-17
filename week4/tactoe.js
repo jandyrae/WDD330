@@ -3,11 +3,20 @@ let gameRunning = true;
 let currentPlayer = "X";
 const player1 = "X"
 const player2 = "O"
+let gameStart = ["", "", "", "", "", "", "", "", ""];
+let winner;
+
+// set status to display on page
+const statusDisplay = document.querySelector('.gameInfo');
+// messages for gameplay
+const drawMessage = () => `Game ended in a draw! Try again.`;
+const currentPlayersTurn = () => `It's ${currentPlayer}'s turn`;
+// Who's turn to start
+statusDisplay.innerHTML = currentPlayersTurn();
 
 function playerTurn(event) {
   if (!event.target.innerHTML.length) {
-    event.target.innerHTML = currentPlayer;
-    // forces turn taking
+    event.target.innerHTML = currentPlayer; // forces turn taking 
     if (currentPlayer === player1) {
       currentPlayer = player2;
     } else {
@@ -15,30 +24,25 @@ function playerTurn(event) {
     }
   }
 }
-
-//  reset came functionality
+// reset came functionality
 function reset() {
   restartGame();
 }
 
-let gameStart = ["", "", "", "", "", "", "", "", ""];
-
 function handleSquareClick(clickedSquareEvent) {
-  const clickedSquare = clickedSquareEvent.target;
+  const clickedSquare = clickedSquareEvent.target; 
   // turn string into integer that is assigned to index to use in array 
-  const clickedSquareIndex = parseInt(
-    clickedSquare.getAttribute('data-square')
-  );
+  const clickedSquareIndex = parseInt(clickedSquare.getAttribute('data-square'));
   if (gameStart[clickedSquareIndex] !== '' || !gameRunning) {
-    console.log(gameStart);
+    // console.log(gameStart); 
     return;
   }
   handleSquarePlayed(clickedSquare, clickedSquareIndex);
-  checkWinner();
+  checkWinner() 
 }
 
-// function called in handleSquareClick
-function handleSquarePlayed(clickedSquare, clickedSquareIndex) {
+// function called in handleSquareClickfunction 
+handleSquarePlayed(clickedSquare, clickedSquareIndex) {
   gameStart[clickedSquareIndex] = currentPlayer;
   clickedSquare.innerHTML = currentPlayer;
 }
@@ -50,7 +54,7 @@ function handlePlayerChange() {
 }
 
 const winnerIf = [
-  // array of each possible winning conditions
+  // array of each possible winning conditions 
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -62,52 +66,48 @@ const winnerIf = [
 ];
 
 function checkWinner() {
-  let gameWon = false;
-  // loop through the winnerIf arrays 
-  for (let i = 0; i <= 7; i++) {
+  let i = 0; 
+  handlePlayerChange();
+  gameWon = false; // loop through the winnerIf arrays 
+  while (i <= 7) {
     let winner = winnerIf[i];
     let a = gameStart[winner[0]];
     let b = gameStart[winner[1]];
     let c = gameStart[winner[2]];
-    if (a === "" || b === "" || c === "") {
-      continue;
-    }
-    if (a === b && b === c) {
-      gameWon == true;
+    console.log(a, b, c); 
+    console.log(gameStart, gameWon); 
+    if (a != '' && b != '' && c != '' && a == b && a == c) {
+      console.log(currentPlayer); 
+      gameWon = true;
+      console.log(gameStart, gameWon); 
       break;
-    }
+    } 
+    i++;
   }
   if (gameWon) {
-    statusDisplay.innerHTML = winningMessage();
+    winner = currentPlayer;
+    if (winner === "O") {
+      winner = "X";
+    } else {
+      winner = "O";
+    }
+    statusDisplay.innerHTML = `Player ${winner} has won!`;
     gameRunning = false;
+  } 
+  // handles if no one wins but there are no empty spaces a "draw" 
+  let drawGame = !gameStart.includes("") && !gameWon; 
+  if (drawGame) { 
+    statusDisplay.innerHTML = drawMessage(); 
+    gameRunning = false; 
+    return; 
   }
-  // handles if no one wins but there are no empty spaces a "draw"
-  let drawGame = !gameStart.includes("");
-  if (drawGame) {
-    statusDisplay.innerHTML = drawMessage();
-    gameRunning = false;
-    return;
+}
+  document.querySelectorAll('.square').forEach(square => square.addEventListener('click', handleSquareClick));
+  // restart the game set player and clear the array
+  function restartGame() {
+    gameRunning = true;
+    currentPlayer = "X";
+    gameStart = ["", "", "", "", "", "", "", "", ""];
+    statusDisplay.innerHTML = currentPlayersTurn();
+    document.querySelectorAll('.square').forEach(square => square.innerHTML = "");
   }
-  handlePlayerChange();
-}
-
-document.querySelectorAll('.square').forEach(square => square.addEventListener('click', handleSquareClick));
-
-// set status to display on page
-const statusDisplay = document.querySelector('.gameInfo');
-// messages for gameplay and winner
-const winningMessage = () => `Player ${currentPlayer} has won!`;
-const drawMessage = () => `Game ended in a draw! Try again.`;
-const currentPlayersTurn = () => `It's ${currentPlayer}'s turn`;
-
-// // Who's turn to start
-statusDisplay.innerHTML = currentPlayersTurn();
-
-// restart the game set player and clear the array
-function restartGame() {
-  gameRunning = true;
-  currentPlayer = "X";
-  gameStart = ["", "", "", "", "", "", "", "", ""];
-  statusDisplay.innerHTML = currentPlayersTurn();
-  document.querySelectorAll('.square').forEach(square => square.innerHTML = "");
-}
