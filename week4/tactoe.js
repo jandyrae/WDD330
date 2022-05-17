@@ -94,7 +94,7 @@ function checkWinner() {
     } else {
       winningPlayer = "O";
     }
-    statusDisplay.innerHTML = `Player ${winningPlayer} has won!`;
+    document.querySelector("#winner").innerHTML = `Player ${winningPlayer} has won!`;
     markWinner(winningArray);
     gameRunning = false;
   }
